@@ -7,5 +7,29 @@ body {
     width: fit-content;
     margin: 0 auto;
     background-color: #b8c8d8;
-  background-image: linear-gradient(#b8c8d8, #d7e0e6);
+    background-image: linear-gradient(#b8c8d8, #d7e0e6);
+    overflow: hidden;
+}
+
+#okvir fieldset {
+    border: 2px solid #446e9c;
+    width: 12em;
+    float: left;
+    margin: 2em;
+    align-content: center;
+}
+
+#okvir fieldset legend {
+    color: #446e9c;
+    text-align: center;
+}
+
+.prethodna, .sljedeca {
+    height: 12em;
+    border-radius: 15%;
+}
+
+.trenutna {
+    height: 15em;
+    border-radius: 5%;
 }
