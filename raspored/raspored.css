@@ -1,5 +1,6 @@
 body {
     background-color: white;
+    margin: 0;
 }
 
 #okvir {
@@ -13,7 +14,7 @@ table {
 }
 
 td {
-    width: 1.2em;
+    width: 1.1em;
     padding: 0.1em;
 }
 
@@ -25,23 +26,75 @@ table, tr, td {
     border-collapse: collapse;
 }
 
-.sat {
-    background-color: lightgrey;
-    border: 1px solid black;
+.satnica {
+    height: 2em;
 }
 
-.dan, .prazno {
+.dan {
     text-align: right;
     padding: 0.5em;
     font-size: 1.1em;
+    font-family: "Lucida Console", Courier, monospace;
 }
 
 .vrijeme {
     text-align: center;
     vertical-align: bottom;
+    font-size: 0.75em;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 .prvi {
     font-weight: bold;
 }
 
+.sat:nth-child(2n) {
+    border-right-style: dashed;
+    border-right-width: 1px;
+    border-left-style: solid;
+}
+
+.sat:nth-child(4n + 2) {
+    border-right-width: 2px;
+    border-right-color: gray;
+}
+
+.sat:nth-child(27) {
+    border-right: 1px solid black;
+}
+
+.sat:nth-child(23) {
+    border-right-style: dashed;
+}
+
+.sat:nth-child(6n + 1) {
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-right-color: gray;
+}
+
+.sat {
+    background-color: #e6e6e6;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right-width: 1px;
+    border-left-width: 1px;
+}
+
+.cas {
+    background-color: #dee7f0;
+    height: 100%;
+    width: 100%;
+}
+
+.predavanje {
+    column-span: 6;
+}
+
+.vjezbe {
+    column-span: 3;
+}
+
+.tutorijal {
+    column-span: 4;
+}
