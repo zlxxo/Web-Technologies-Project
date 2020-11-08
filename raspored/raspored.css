@@ -1,5 +1,47 @@
+body {
+    background-color: white;
+}
+
 #okvir {
-    background-color:lightgray;
-    width: 750px;
+    width: fit-content;
     margin: 0 auto;
 }
+
+table {
+    width: fit-content;
+    height: fit-content;
+}
+
+td {
+    width: 1.5em;
+    padding: 0.1em;
+}
+
+tr {
+    height: 4em;
+}
+
+table, tr, td {
+    border-collapse: collapse;
+}
+
+.sat {
+    align-content: center;
+    background-color: lightgrey;
+    border: 1px solid black;
+}
+
+.dan, .prazno {
+    text-align: right;
+    padding: 0.5em;
+    font-size: 1.1em;
+}
+
+.vrijeme {
+    border: 1px solid black;
+}
+
+.prvi {
+    font-weight: bold;
+}
+
