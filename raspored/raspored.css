@@ -90,13 +90,13 @@ table, tr, td {
 }
 
 .predavanje {
-    column-span: 6;
+    columns: 1.1em 6;
 }
 
 .vjezbe {
-    column-span: 3;
+    columns: 1.1em 3;
 }
 
 .tutorijal {
-    column-span: 4;
+    columns: 1.1em 4;
 }
