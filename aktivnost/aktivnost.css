@@ -22,14 +22,33 @@ body {
 #okvir fieldset legend {
     color: #446e9c;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#okvir fieldset div {
+    align-content: center;
+}
+
+#okvir fieldset div p {
+    color: #446e9c;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .prethodna, .sljedeca {
-    height: 12em;
+    height: 13em;
     border-radius: 15%;
 }
 
 .trenutna {
     height: 15em;
     border-radius: 5%;
+}
+
+.predmet {
+    font-size: 1.25em;
+}
+
+.opis {
+    font-size: 0.75em;
 }
