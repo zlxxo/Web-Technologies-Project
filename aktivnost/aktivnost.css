@@ -1,0 +1,11 @@
+body {
+    background-color: white;
+    margin: 0;
+}
+
+#okvir {
+    width: fit-content;
+    margin: 0 auto;
+    background-color: #b8c8d8;
+  background-image: linear-gradient(#b8c8d8, #d7e0e6);
+}
