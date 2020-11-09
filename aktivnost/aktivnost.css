@@ -1,11 +1,12 @@
 body {
     background-color: white;
-    margin: 0;
+    margin: 0%;
+    padding: 0%;
 }
 
 #okvir {
     width: fit-content;
-    margin: 0 auto;
+    margin: 2em auto;
     background-color: #b8c8d8;
     background-image: linear-gradient(#b8c8d8, #d7e0e6);
     overflow: hidden;
@@ -51,4 +52,31 @@ body {
 
 .opis {
     font-size: 0.75em;
+}
+
+#meni {
+    margin: 0%;
+    background-color: #0a3958;
+    width: 100%;
+    height: 3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    position: relative;
+}
+
+#meni ul {
+    position: absolute;
+    bottom: 0%;
+}
+
+#meni ul li {
+    margin-right: 1em;
+    display: inline;
+}
+
+#meni ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
 }
