@@ -5,6 +5,20 @@ body {
 
 #okvir {
     width: fit-content;
-    margin: 0 auto;
+    margin: 2em auto;
     align-content: center;
+}
+
+td {
+    padding: 1em;
+    width: 50%;
+}
+
+tr:hover {
+    border-width: 2px;
+}
+
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }
