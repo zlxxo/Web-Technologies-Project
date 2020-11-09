@@ -11,8 +11,8 @@ body {
 
 form {
     background-color: #eff5fa;
-    border: 2px solid #739ac4;
-    border-radius: 5%;
+    border: 2px solid #556679;
+    border-radius: 3%;
     width: fit-content;
     padding: 1em;
     align-content: center;
@@ -24,6 +24,7 @@ button {
     width: 30%;
     text-align: center;
     float: right;
+    background-color: #d6dee4;
 }
 
 button, input, select, label {
