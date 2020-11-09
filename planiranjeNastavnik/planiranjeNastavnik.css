@@ -1,0 +1,37 @@
+body {
+    background-color: white;
+    margin: 0;
+}
+
+#okvir {
+    width: fit-content;
+    margin: auto;
+    margin-top: 5%;
+}
+
+form {
+    background-color: #eff5fa;
+    border: 2px solid #739ac4;
+    border-radius: 5%;
+    width: fit-content;
+    padding: 1em;
+    align-content: center;
+    margin-top: 1em;   
+}
+
+button {
+    margin-top: 1em;
+    width: 30%;
+    text-align: center;
+    float: right;
+}
+
+button, input, select, label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #384d64;
+    font-size: 1em;
+}
+
+tr:nth-child(2n) {
+    height: 0.3em;
+}

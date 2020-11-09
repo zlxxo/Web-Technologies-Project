@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Aktivnosti</title>
+        <link rel="stylesheet" type="text/css" href="planiranjeNastavnik.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+        <div id="okvir">
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <label>Naziv predmeta:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="naziv-predmeta"/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>
+                            <label>Tip:</label>
+                        </td>
+                        <td>
+                            <select type="dr" id="tip">
+                                <option>Predavanja</option>
+                                <option>Vježbe</option>
+                                <option>Tutorijal</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>
+                            <label>Vrijeme početka:</label>
+                        </td>
+                        <td>
+                            <input type="time" id="vrijeme-pocetka"/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>
+                            <label>Vrijeme kraja:</label>
+                        </td>
+                        <td>
+                            <input type="time" id="vrijeme-kraja"/>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td>
+                            <label>Dan u sedmici:</label>
+                        </td>
+                        <td>
+                            <select type="dr" id="dan">
+                                <option>Ponedjeljak</option>
+                                <option>Utorak</option>
+                                <option>Srijeda</option>
+                                <option>Četvrtak</option>
+                                <option>Petak</option>
+                                <option>Subota</option>
+                                <option>Nedjelja</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td colspan="2">
+                            <button>OK</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
