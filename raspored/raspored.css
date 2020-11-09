@@ -1,11 +1,12 @@
 body {
     background-color: white;
-    margin: 0;
+    margin: 0%;
+    padding: 0%;
 }
 
 #okvir {
     width: fit-content;
-    margin: 0 auto;
+    margin: 3em auto;
 }
 
 table {
@@ -87,4 +88,35 @@ table, tr, td {
 
 .tutorijal {
     columns: 1.1em 4;
+}
+
+#meni {
+    margin: 0%;
+    background-color: #0a3958;
+    width: 100%;
+    min-height: 3em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    position: relative;
+    background-image: url(../slike/etf.gif);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10em;
+}
+
+#meni ul {
+    position: absolute;
+    bottom: 0%;
+}
+
+#meni ul li {
+    margin-right: 1em;
+    display: inline;
+}
+
+#meni ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
 }
