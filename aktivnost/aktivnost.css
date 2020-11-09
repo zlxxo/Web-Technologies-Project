@@ -10,6 +10,9 @@ body {
     background-color: #b8c8d8;
     background-image: linear-gradient(#b8c8d8, #d7e0e6);
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 #okvir fieldset {
