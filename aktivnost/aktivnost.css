@@ -62,10 +62,6 @@ body {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     position: relative;
-    background-image: url(../slike/etf.gif);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 10em;
 }
 
 #meni ul {
