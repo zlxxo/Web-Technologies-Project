@@ -18,6 +18,11 @@ form {
     align-content: center; 
 }
 
+td {
+    padding-bottom: 0.4em;
+    padding-top: 0.4em;
+}
+
 button {
     margin-top: 1em;
     width: 30%;
@@ -30,10 +35,6 @@ button, input, select, label {
     font-family: Arial, Helvetica, sans-serif;
     color: #253241;
     font-size: 1em;
-}
-
-tr:nth-child(2n) {
-    height: 0.3em;
 }
 
 #meni {
