@@ -37,6 +37,10 @@ button, input, select, label {
     font-size: 1em;
 }
 
+#tip, #dan {
+    width: 100%;
+}
+
 #meni {
     margin: 0%;
     background-color: #0a3958;
