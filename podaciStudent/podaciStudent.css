@@ -35,25 +35,20 @@ table, tr, td {
     margin: 0%;
     background-color: #0a3958;
     width: 100%;
-    min-height: 3em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    position: relative;
+    height: fit-content;
+    overflow: hidden;
 }
 
-#meni ul {
-    position: absolute;
-    bottom: 0%;
-}
-
-#meni ul li {
-    margin-right: 1em;
-    display: inline;
-}
-
-#meni ul li a {
+#meni a {
+    float: left;
     color: white;
+    text-align: center;
+    padding: 1.3em 1em;
     text-decoration: none;
     font-family: Trebuchet MS, sans-serif;
     font-size: 1.1em;
+}
+
+#meni a:hover {
+    background-color: rgb(35, 35, 184);
 }
