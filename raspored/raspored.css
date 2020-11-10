@@ -15,8 +15,7 @@ table {
 }
 
 td {
-    width: 1.1em;
-    padding: 0.1em;
+    width: 1.3em;
 }
 
 tr {
@@ -33,7 +32,7 @@ table, tr, td {
 
 .dan {
     text-align: right;
-    padding: 0.5em;
+    padding-right: 0.5em;
     font-size: 1.1em;
     font-family: "Lucida Console", Courier, monospace;
 }
@@ -54,40 +53,46 @@ table, tr, td {
     border-width: 2px;
     border-color: black;
     border-style: solid;
+    margin: 0%;
+    padding: 0%;
 }
 
-.sat:nth-child(2n) {
+.cijeli {
     border-right-style: dashed;
 }
 
-.sat:nth-child(2n + 1) {
+.pola {
     border-left-style: dashed;
-}
-
-.sat:nth-child(24) {
-    border-left-style: dashed;
-}
-
-.sat:nth-child(23) {
-    border-right-style: dashed;
 }
 
 .cas {
     background-color: #dee7f0;
-    height: 100%;
-    width: 100%;
+    padding: 0.2em;
 }
 
-.predavanje {
-    columns: 1.1em 6;
+.cas p {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
 }
 
-.vjezbe {
-    columns: 1.1em 3;
+.cas .predmet {
+    font-size: 1em;
+    margin-bottom: 0%;
+    margin-top: 0%;
 }
 
-.tutorijal {
-    columns: 1.1em 4;
+.cas .tip {
+    margin-top: 0%;
+    font-size: 0.7em;
+}
+
+.pola.predavanje, .pola.tutorijal {
+    border-left-style: dashed;
+}
+
+.cijeli.vjezbe, .pola.predavanje, .pola.tutorijal {
+    border-right-style: dashed;
 }
 
 #meni {
