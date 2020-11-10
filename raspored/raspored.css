@@ -76,14 +76,15 @@ table, tr, td {
 }
 
 .cas .predmet {
-    font-size: 1em;
+    font-size: 1.1em;
     margin-bottom: 0%;
     margin-top: 0%;
 }
 
 .cas .tip {
     margin-top: 0%;
-    font-size: 0.7em;
+    font-size: 0.8em;
+    margin-bottom: 1.3em;
 }
 
 .pola.predavanje, .pola.tutorijal {
@@ -117,6 +118,6 @@ table, tr, td {
 #meni ul li a {
     color: white;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-family: Trebuchet MS, sans-serif;
+    font-size: 1.1em;
 }
