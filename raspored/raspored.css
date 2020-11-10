@@ -57,6 +57,12 @@ table, tr, td {
     padding: 0%;
 }
 
+.predavanje, .vjezbe, .tutorijal {
+    background-color: #dee7f0;
+    padding: 0%;
+    margin: 0%;
+}
+
 .cijeli {
     border-right-style: dashed;
 }
@@ -65,26 +71,23 @@ table, tr, td {
     border-left-style: dashed;
 }
 
-.cas {
-    background-color: #dee7f0;
-    padding: 0.2em;
-}
-
 .cas p {
     text-align: center;
     font-family: Trebuchet MS, sans-serif;
+    margin: 0%;
+    padding: 0%;
 }
 
 .cas .predmet {
     font-size: 1.1em;
-    margin-bottom: 0%;
-    margin-top: 0%;
+    margin: 0%;
+    padding: 0%;
 }
 
 .cas .tip {
-    margin-top: 0%;
     font-size: 0.8em;
-    margin-bottom: 1.3em;
+    margin: 0%;
+    padding: 0%;
 }
 
 .pola.predavanje, .pola.tutorijal {
