@@ -73,4 +73,31 @@ button, input, select, label {
         font-family: Trebuchet MS, sans-serif;
         font-size: 0.8em;
     }
+
+    table {
+        width: 100%;
+    }
+
+    tr {
+        display: table;
+        margin: 0%;
+        margin-bottom: 1.5em;
+        padding: 0%;
+    }
+
+    td {
+        display: table-row;
+        vertical-align: top;
+        width: 90%;
+        margin: 0%;
+        padding: 0%;
+    }
+
+    input, select, button, label {
+        width: 100%;
+        margin: 0%;
+        padding: auto;
+        font-size: 0.8em;
+    }
+
 }
