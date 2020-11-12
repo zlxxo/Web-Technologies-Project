@@ -142,4 +142,32 @@ table, tr, td {
     #okvir {
         margin: 2em auto;
     }
+
+    table {
+        width: fit-content;
+    }
+
+    tr {
+        display: table;
+        width: fit-content;
+    }
+
+    td {
+        display: none;
+    }
+
+    .dan, .sat.cijeli.predavanje, .sat.cijeli.tutorijal, .sat.cijeli.vjezbe,
+    .sat.pola.predavanje, .sat.pola.tutorijal, .sat.pola.vjezbe {
+        display: table-row;
+        width: 20em;
+        align-content: center;
+    }
+
+    .dan {
+        width: max-content;
+    }
+
+    .sat div {
+        width: 100%;
+    }
 }
