@@ -11,6 +11,7 @@ body {
     background-image: linear-gradient(#b8c8d8, #d7e0e6);
     overflow: hidden;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-end;
 }
@@ -99,19 +100,19 @@ body {
         padding: 0%;
         display: table;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     #okvir fieldset {
-        margin: 5%;
-        width: 80%;
-        vertical-align: top;
+        width: 60%;
+        margin: auto;
+        margin-top: 3%;
+        margin-bottom: 3%;
     }
 
     .prethodna {
         display: none;
-    }
-
-    .trenutna, .sljedeca {
-        display: table-cell;
     }
 }
