@@ -149,25 +149,24 @@ table, tr, td {
 
     tr {
         display: table;
-        width: fit-content;
     }
 
     td {
         display: none;
     }
 
+    td, tr {
+        margin: 0%;
+        padding: 0%;
+    }
+
     .dan, .sat.cijeli.predavanje, .sat.cijeli.tutorijal, .sat.cijeli.vjezbe,
     .sat.pola.predavanje, .sat.pola.tutorijal, .sat.pola.vjezbe {
         display: table-row;
-        width: 20em;
-        align-content: center;
     }
 
     .dan {
-        width: max-content;
-    }
-
-    .sat div {
-        width: 100%;
+        text-orientation: upright;
+        writing-mode: vertical-rl;
     }
 }
