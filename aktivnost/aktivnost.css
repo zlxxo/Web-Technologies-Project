@@ -89,4 +89,28 @@ body {
         font-family: Trebuchet MS, sans-serif;
         font-size: 0.8em;
     }
+
+    .prethodna {
+        display: none;
+    }
+
+    #okvir {
+        width: 90%;
+        padding: 0%;
+        display: table;
+    }
+
+    #okvir fieldset {
+        margin: 5%;
+        width: 80%;
+        vertical-align:top;
+    }
+
+    .trenutna {
+        display:table-cell;
+    }
+
+    .sljedeca {
+        display:table-cell;
+    }
 }
