@@ -83,6 +83,7 @@ button, input, select, label {
         margin: 0%;
         margin-bottom: 1.5em;
         padding: 0%;
+        width: 100%;
     }
 
     td {
@@ -98,6 +99,10 @@ button, input, select, label {
         margin: 0%;
         padding: auto;
         font-size: 0.8em;
+    }
+
+    button {
+        width: 50%;
     }
 
 }
