@@ -103,14 +103,10 @@ body {
     #okvir fieldset {
         margin: 5%;
         width: 80%;
-        vertical-align:top;
+        vertical-align: top;
     }
 
-    .trenutna {
-        display:table-cell;
-    }
-
-    .sljedeca {
-        display:table-cell;
+    .trenutna, .sljedeca {
+        display: table-cell;
     }
 }

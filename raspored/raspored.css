@@ -98,6 +98,14 @@ table, tr, td {
     border-right-style: dashed;
 }
 
+.poslije-19 {
+    border-left-style: dashed;
+}
+
+.prije-19 {
+    border-right-style: dashed;
+}
+
 #meni {
     margin: 0%;
     background-color: #0a3958;
