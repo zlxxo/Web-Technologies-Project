@@ -74,6 +74,10 @@ button, input, select, label {
         font-size: 0.8em;
     }
 
+    #okvir {
+        margin: 2em auto;
+    }
+
     table {
         width: 100%;
     }

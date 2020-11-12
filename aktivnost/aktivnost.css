@@ -90,6 +90,10 @@ body {
         font-size: 0.8em;
     }
 
+    #okvir {
+        margin: 2em auto;
+    }
+    
     .prethodna {
         display: none;
     }
