@@ -52,3 +52,15 @@ table, tr, td {
 #meni a:hover {
     background-color: rgb(35, 35, 184);
 }
+
+@media only screen and (max-width: 600px) {
+    #meni a {
+        float: left;
+        color: white;
+        text-align: center;
+        padding: 0.5em 0.4em;
+        text-decoration: none;
+        font-family: Trebuchet MS, sans-serif;
+        font-size: 0.8em;
+    }
+}
