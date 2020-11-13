@@ -164,9 +164,4 @@ table, tr, td {
     .sat.pola.predavanje, .sat.pola.tutorijal, .sat.pola.vjezbe {
         display: table-row;
     }
-
-    .dan {
-        text-orientation: upright;
-        writing-mode: vertical-rl;
-    }
 }
