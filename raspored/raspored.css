@@ -141,18 +141,30 @@ table, tr, td {
 
     #okvir {
         margin: 2em auto;
+        width: max-content;
     }
 
     table {
-        width: fit-content;
+        width: max-content;
     }
 
     tr {
         display: table;
     }
 
+    tr:nth-child(1) {
+        display: none;
+    }
+
     td {
         display: none;
+    }
+
+    .sat {
+        border-width: 1px;
+        border-style: solid;
+        border-color: black;
+        width: max-content;
     }
 
     td, tr {
@@ -160,8 +172,9 @@ table, tr, td {
         padding: 0%;
     }
 
-    .dan, .sat.cijeli.predavanje, .sat.cijeli.tutorijal, .sat.cijeli.vjezbe,
-    .sat.pola.predavanje, .sat.pola.tutorijal, .sat.pola.vjezbe {
+    .dan, .predavanje, .tutorijal, .vjezbe {
         display: table-row;
+        width: max-content;
+        text-align: center;
     }
 }
