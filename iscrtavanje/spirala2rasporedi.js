@@ -12,6 +12,7 @@ function generisiRasporede() {
     iscrtajRaspored(okvir1, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], -8, 21);
     // nevalidna dodavanja aktivnosti
     //dodajAktivnost(okvir1, "RMA", "vježbe", 12.5, 14, "Utorak");
+    dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "Utorak");
     //dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "U");
     //dodajAktivnost(okvir, "RMA", "vježbe", 12.05, 14, "Utorak");
     //dodajAktivnost(okvir, "RMA", "vježbe", 15, 14, "U");

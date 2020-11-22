@@ -75,8 +75,8 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
         alert("Greška - raspored nije kreiran!");
     } else if(!raspored.innerHTML.includes(dan + "</td>") ||
         (vrijemePocetak < 0 || vrijemeKraj > 24 || vrijemePocetak >= vrijemeKraj ||
-        !(Number.isInteger(vrijemePocetak) || vrijemePocetak.toString().includes(".5")) ||
-        !(Number.isInteger(vrijemeKraj) || vrijemeKraj.toString().includes(".5")))) {
+        !(Number.isInteger(vrijemePocetak) || Number.isInteger(vrijemePocetak*2)) ||
+        !(Number.isInteger(vrijemeKraj) || Number.isInteger(vrijemeKraj*2)))) {
             alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin!");
     }
     
