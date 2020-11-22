@@ -10,5 +10,9 @@ function generisiRasporede() {
     //dodajAktivnost(okvir, "OI", "predavanje", 12, 15, "Ponedjeljak");
     let okvir1 = document.getElementById("okvir1");
     iscrtajRaspored(okvir1, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], -8, 21);
-    dodajAktivnost(okvir1, "RMA", "vježbe", 12.5, 14, "Utorak");
+    // nevalidna dodavanja aktivnosti
+    //dodajAktivnost(okvir1, "RMA", "vježbe", 12.5, 14, "Utorak");
+    //dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "U");
+    //dodajAktivnost(okvir, "RMA", "vježbe", 12.05, 14, "Utorak");
+    //dodajAktivnost(okvir, "RMA", "vježbe", 15, 14, "U");
 }

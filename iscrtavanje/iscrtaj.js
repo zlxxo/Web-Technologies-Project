@@ -72,7 +72,12 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
     
     if(raspored === null || !raspored.innerHTML.includes("<table>")) {
-        alert("Greška - raspored nije kreiran");
+        alert("Greška - raspored nije kreiran!");
+    } else if(!raspored.innerHTML.includes(dan + "</td>") ||
+        (vrijemePocetak < 0 || vrijemeKraj > 24 || vrijemePocetak >= vrijemeKraj ||
+        !(Number.isInteger(vrijemePocetak) || vrijemePocetak.toString().includes(".5")) ||
+        !(Number.isInteger(vrijemeKraj) || vrijemeKraj.toString().includes(".5")))) {
+            alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin!");
     }
     
     let id = dan.toLowerCase() + "-";
