@@ -1,3 +1,14 @@
+let okvir = document.getElementById("okvir");
+iscrtajRaspored(okvir, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 08, 21);
+dodajAktivnost(okvir, "WT", "predavanje", 9, 12, "Ponedjeljak");
+dodajAktivnost(okvir, "WT", "vježbe", 12, 13.5, "Ponedjeljak");
+dodajAktivnost(okvir, "RMA", "predavanje", 14, 17, "Ponedjeljak");
+dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "Utorak");
+dodajAktivnost(okvir, "DM", "tutorijal", 14, 16, "Utorak");
+dodajAktivnost(okvir, "DM", "predavanje", 16, 19, "Utorak");
+dodajAktivnost(okvir, "OI", "predavanje", 12, 15, "Ponedjeljak");
+
+
 function iscrtajRaspored(div, dani, satPocetak, satKraj) {
     if(satPocetak >= satKraj || satPocetak < 0 || satPocetak > 24 || satKraj < 0 ||
         satKraj > 24 || !Number.isInteger(satPocetak) || !Number.isInteger(satKraj)) {
@@ -21,7 +32,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     if(kolona === 0) {
                         kod += "<td class='vrijeme' colspan='3'></td>\n";
                     } else if(kolona%2 === 1) {
-                        if(kolona%2 === 1 && ((sat <= 12 && sat%2 === 0) || (sat > 13 && sat%2 === 1))) {
+                        if(kolona%2 === 1 && ((sat <= 12 && sat%2 === 0) || (sat > 13 && sat < satKraj && sat%2 === 1))) {
                             kod += "<td class='vrijeme' colspan='2'>" + sat + ":00</td>\n";
                         } else {
                             kod += "<td class='vrijeme' colspan='2'></td>\n";
