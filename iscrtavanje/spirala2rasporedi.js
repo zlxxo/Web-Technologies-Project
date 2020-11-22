@@ -87,5 +87,5 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
     } else {
         id += "pola-" + (Number.parseInt(vrijemePocetak) + 1).toString();
     }
-    alert(id);
+    
 }
