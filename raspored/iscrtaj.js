@@ -38,15 +38,15 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     } else {
                         if(kolona%2 === 0) {
                             if(sat === 18) {
-                                kod += "<td class='sat pola prije-19'></td>\n";
+                                kod += "<td id='" + dan + "-pola-" + (sat - 1).toString() + "' class='sat pola prije-19'></td>\n";
                             } else {
-                                kod += "<td class='sat pola'></td>\n";
+                                kod += "<td id='" + dan + "-pola-" + (sat - 1).toString() + "' class='sat pola'></td>\n";
                             }
                         } else {
                             if(sat === 19) {
-                                kod += "<td class='sat cijeli poslije-19'></td>\n";
+                                kod += "<td id='" + dan + "-" + sat.toString() + "' class='sat cijeli poslije-19'></td>\n";
                             } else {
-                                kod += "<td class='sat cijeli'></td>\n";
+                                kod += "<td id='" + dan + "-" + sat.toString() + "' class='sat cijeli'></td>\n";
                             }
                         }
                     }
