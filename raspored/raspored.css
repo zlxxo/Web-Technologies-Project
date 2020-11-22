@@ -4,7 +4,7 @@ body {
     padding: 0%;
 }
 
-#okvir {
+#okvir, #okvir1 {
     width: fit-content;
     margin: 3em auto;
     font-family: Trebuchet MS, sans-serif;
@@ -141,7 +141,7 @@ table, tr, td {
         font-size: 0.8em;
     }
 
-    #okvir {
+    #okvir, #okvir1 {
         margin: 2em auto;
         width: max-content;
     }
