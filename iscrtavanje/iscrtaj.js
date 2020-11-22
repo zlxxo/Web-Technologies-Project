@@ -69,22 +69,33 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
     }
 }
 
-function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
-    
-    if(raspored === null || !raspored.innerHTML.includes("<table>")) {
-        alert("Greška - raspored nije kreiran!");
-    } else if(!raspored.innerHTML.includes(dan + "</td>") ||
-        (vrijemePocetak < 0 || vrijemeKraj > 24 || vrijemePocetak >= vrijemeKraj ||
-        !(Number.isInteger(vrijemePocetak) || Number.isInteger(vrijemePocetak*2)) ||
-        !(Number.isInteger(vrijemeKraj) || Number.isInteger(vrijemeKraj*2)))) {
-            alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin!");
-    }
-    
+function generisiID(dan, vrijemePocetak) {
     let id = dan.toLowerCase() + "-";
     if(vrijemePocetak - Number.parseInt(vrijemePocetak) < 0.5) {
         id += vrijemePocetak.toString();
     } else {
         id += "pola-" + (Number.parseInt(vrijemePocetak) + 1).toString();
     }
-    
+    return id;
+}
+
+function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
+    if(raspored === null || !raspored.innerHTML.includes("<table>")) {
+        alert("Greška - raspored nije kreiran!");
+        return;
+    } else if(!raspored.innerHTML.includes(dan + "</td>") ||
+        (vrijemePocetak < 0 || vrijemeKraj > 24 || vrijemePocetak >= vrijemeKraj ||
+        !(Number.isInteger(vrijemePocetak) || Number.isInteger(vrijemePocetak*2)) ||
+        !(Number.isInteger(vrijemeKraj) || Number.isInteger(vrijemeKraj*2)))) {
+        alert("Greška - u rasporedu ne postoji dan ili vrijeme u kojem pokušavate dodati termin!");
+        return;
+    }
+
+    let polja = [];
+    let i = 0;
+    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
+        polja.push(generisiID(dan, vrijeme/2));
+        i++;
+    }
+    alert(polja);
 }
