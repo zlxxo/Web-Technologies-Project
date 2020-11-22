@@ -1,12 +1,12 @@
 let okvir = document.getElementById("okvir");
 iscrtajRaspored(okvir, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 08, 21);
 dodajAktivnost(okvir, "WT", "predavanje", 9, 12, "Ponedjeljak");
-dodajAktivnost(okvir, "WT", "vježbe", 12, 13.5, "Ponedjeljak");
-dodajAktivnost(okvir, "RMA", "predavanje", 14, 17, "Ponedjeljak");
+//dodajAktivnost(okvir, "WT", "vježbe", 12, 13.5, "Ponedjeljak");
+//dodajAktivnost(okvir, "RMA", "predavanje", 14, 17, "Ponedjeljak");
 dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "Utorak");
-dodajAktivnost(okvir, "DM", "tutorijal", 14, 16, "Utorak");
-dodajAktivnost(okvir, "DM", "predavanje", 16, 19, "Utorak");
-dodajAktivnost(okvir, "OI", "predavanje", 12, 15, "Ponedjeljak");
+//dodajAktivnost(okvir, "DM", "tutorijal", 14, 16, "Utorak");
+//dodajAktivnost(okvir, "DM", "predavanje", 16, 19, "Utorak");
+//dodajAktivnost(okvir, "OI", "predavanje", 12, 15, "Ponedjeljak");
 
 
 function iscrtajRaspored(div, dani, satPocetak, satKraj) {
@@ -33,7 +33,11 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                         kod += "<td class='vrijeme' colspan='3'></td>\n";
                     } else if(kolona%2 === 1) {
                         if(kolona%2 === 1 && ((sat <= 12 && sat%2 === 0) || (sat > 13 && sat < satKraj && sat%2 === 1))) {
-                            kod += "<td class='vrijeme' colspan='2'>" + sat + ":00</td>\n";
+                            let jednocifreni = "";
+                            if(sat < 10) {
+                                jednocifreni += "0"
+                            }
+                            kod += "<td class='vrijeme' colspan='2'>" + jednocifreni + sat + ":00</td>\n";
                         } else {
                             kod += "<td class='vrijeme' colspan='2'></td>\n";
                         }
@@ -49,21 +53,23 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     } else {
                         if(kolona%2 === 0) {
                             if(sat === 18) {
-                                kod += "<td id='" + dan + "-pola-" + (sat - 1).toString() + "' class='sat pola prije-19'></td>\n";
+                                kod += "<td id='" + dan.toLowerCase() + "-pola-" +
+                                (sat - 1).toString() + "' class='sat pola prije-19'></td>\n";
                             } else {
-                                kod += "<td id='" + dan + "-pola-" + (sat - 1).toString() + "' class='sat pola'></td>\n";
+                                kod += "<td id='" + dan.toLowerCase() + "-pola-" + (sat - 1).toString() + "' class='sat pola'></td>\n";
                             }
                         } else {
                             if(sat === 19) {
-                                kod += "<td id='" + dan + "-" + sat.toString() + "' class='sat cijeli poslije-19'></td>\n";
+                                kod += "<td id='" + dan.toLowerCase() + "-" +
+                                sat.toString() + "' class='sat cijeli poslije-19'></td>\n";
                             } else {
-                                kod += "<td id='" + dan + "-" + sat.toString() + "' class='sat cijeli'></td>\n";
+                                kod += "<td id='" + dan.toLowerCase() + "-" + sat.toString() + "' class='sat cijeli'></td>\n";
                             }
                         }
                     }
                 }
                 pola = !pola;
-                if(kolona%2 === 0) {
+                if(kolona%2 === 0 && kolona != 0) {
                     sat++;
                 }
             }
@@ -75,5 +81,11 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 }
 
 function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
-
+    let id = dan.toLowerCase() + "-";
+    if(vrijemePocetak - Number.parseInt(vrijemePocetak) < 0.5) {
+        id += vrijemePocetak.toString();
+    } else {
+        id += "pola-" + (Number.parseInt(vrijemePocetak) + 1).toString();
+    }
+    alert(id);
 }
