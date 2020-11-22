@@ -45,10 +45,10 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     if(kolona%2 === 0) {
                         if(sat === 18) {
                             kod += "<td id='" + div.id + "-" + dan.toLowerCase() + "-pola-" +
-                            (sat - 1).toString() + "' class='sat pola prije-19'></td>\n";
+                            (sat + 1).toString() + "' class='sat pola prije-19'></td>\n";
                         } else {
                             kod += "<td id='" + div.id + "-" + dan.toLowerCase() + "-pola-" +
-                            (sat - 1).toString() + "' class='sat pola'></td>\n";
+                            (sat + 1).toString() + "' class='sat pola'></td>\n";
                         }
                     } else {
                         if(sat === 19) {
@@ -95,14 +95,19 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
     }
 
     let polja = [];
-    let i = 0;
-    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
-        let polje = document.getElementById(generisiID(raspored, dan, vrijeme/2));
+    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2 - 1; vrijeme++) {
+        let id = generisiID(raspored, dan, vrijeme/2);
+        var polje = document.getElementById(id);
         if(polje != null && polje.innerHTML != "") {
             alert("Greška - već postoji termin u rasporedu u zadanom vremenu!");
             return;
         }
         polja.push(polje);
-        i++;
+    }
+
+    for(let i = 0; i < polja.length; i++) {
+        if(i != 0) {
+            polja[i].parentNode.removeChild(polja[i]);
+        }
     }
 }
