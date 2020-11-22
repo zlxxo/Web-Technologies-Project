@@ -95,19 +95,27 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
     }
 
     let polja = [];
-    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2 - 1; vrijeme++) {
+    let i = 0;
+    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
         let id = generisiID(raspored, dan, vrijeme/2);
         var polje = document.getElementById(id);
         if(polje != null && polje.innerHTML != "") {
             alert("Greška - već postoji termin u rasporedu u zadanom vremenu!");
             return;
         }
-        polja.push(polje);
-    }
-
-    for(let i = 0; i < polja.length; i++) {
-        if(i != 0) {
-            polja[i].parentNode.removeChild(polja[i]);
+        if(i === 0) {
+            if(tip === "vježbe") {
+                polje.className += " vjezbe";
+            } else {
+                polje.className += " " + tip;
+            }
+            polje.colSpan = ((vrijemeKraj - vrijemePocetak)*2).toString();
+            let kod = "<div class='cas'>\n<p class='predmet'>" + naziv + "</p>\n<p class='tip'>" + tip + "</p></div>";
+            polje.innerHTML += kod;
+        } else {
+            polje.parentNode.removeChild(polje);
         }
+        polja.push(polje);
+        i++;
     }
 }
