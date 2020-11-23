@@ -104,15 +104,15 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
             return;
         }
         if(i === 0) {
-            if(!Number.isInteger(vrijemePocetak) || vrijemePocetak === 19) {
-                polje.style.borderLeftStyle = "dashed";
+            if(Number.isInteger(vrijemePocetak) && vrijemePocetak != 19) {
+                polje.style.borderLeftStyle = "solid";
             } else {
-                polje.style.borderLeftStyle = "solid"
+                polje.style.borderLeftStyle = "dashed"
             }
-            if(!Number.isInteger(vrijemeKraj) || vrijemeKraj === 19) {
-                polje.style.borderRightStyle = "dashed";
+            if(Number.isInteger(vrijemeKraj) && vrijemeKraj != 19) {
+                polje.style.borderRightStyle = "solid";
             } else {
-                polje.style.borderRightStyle = "solid"
+                polje.style.borderRightStyle = "dashed"
             }
             polje.style.backgroundColor = "#dee7f0";
             polje.colSpan = ((vrijemeKraj - vrijemePocetak)*2).toString();
