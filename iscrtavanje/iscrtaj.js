@@ -104,11 +104,17 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
             return;
         }
         if(i === 0) {
-            if(tip === "vježbe") {
-                polje.className += " vjezbe";
+            if(!Number.isInteger(vrijemePocetak) || vrijemePocetak === 19) {
+                polje.style.borderLeftStyle = "dashed";
             } else {
-                polje.className += " " + tip;
+                polje.style.borderLeftStyle = "solid"
             }
+            if(!Number.isInteger(vrijemeKraj) || vrijemeKraj === 19) {
+                polje.style.borderRightStyle = "dashed";
+            } else {
+                polje.style.borderRightStyle = "solid"
+            }
+            polje.style.backgroundColor = "#dee7f0";
             polje.colSpan = ((vrijemeKraj - vrijemePocetak)*2).toString();
             let kod = "<div class='cas'>\n<p class='predmet'>" + naziv + "</p>\n<p class='tip'>" + tip + "</p></div>";
             polje.innerHTML += kod;

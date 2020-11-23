@@ -15,5 +15,9 @@ function generisiRasporede() {
     dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "Utorak");
     dodajAktivnost(okvir, "RMA", "vježbe", 12.5, 14, "U");
     dodajAktivnost(okvir, "RMA", "vježbe", 12.05, 14, "Utorak");
-    dodajAktivnost(okvir, "RMA", "vježbe", 15, 14, "U");
+    dodajAktivnost(okvir, "RMA", "vježbe", 15, 14, "Cetvrtak");
+    dodajAktivnost(okvir, "OIS", "predavanje", 8, 11.5, "Petak");
+    dodajAktivnost(okvir, "OIS", "tutorijal", 11.5, 13.5, "Petak");
+    dodajAktivnost(okvir, "VVS", "predavanje", 12, 14.5, "Četvrtak");
+    dodajAktivnost(okvir, "RG", "predavanje", 15.5, 18, "Četvrtak");
 }
