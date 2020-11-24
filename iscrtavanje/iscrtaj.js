@@ -22,7 +22,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             if(red === 0) {
                 if(kolona === 0) {
                     kod += "<td class='vrijeme' colspan='3'></td>";
-                } else if(kolona%2 === 1) {
+                } else if(pola) {
                     kod += "<td class='vrijeme' colspan='2'>";
                     if((sat <= 12 && sat%2 === 0) || (sat > 13 && sat < satKraj && sat%2 === 1)) {
                         let jednocifreni = "";
@@ -43,7 +43,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     }
                 } else {
                     kod += "<td id='";
-                    if(kolona%2 === 0) {
+                    if(pola) {
                         kod += generisiID(div, dan, sat + 0.5) + "' class='sat pola";
                         if(sat === 18) {
                             kod += " prije-19";
@@ -57,10 +57,10 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
                     kod += "'></td>";
                 }
             }
-            pola = !pola;
-            if(kolona%2 === 0 && kolona != 0) {
+            if(pola && kolona != 0) {
                 sat++;
             }
+            pola = !pola;
         }
         kod += "</tr>";
     }
@@ -90,7 +90,6 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
         return;
     }
 
-    let polja = [];
     let i = 0;
     for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
         let id = generisiID(raspored, dan, vrijeme/2);
@@ -117,7 +116,6 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
         } else {
             polje.parentNode.removeChild(polje);
         }
-        polja.push(polje);
         i++;
     }
 }
