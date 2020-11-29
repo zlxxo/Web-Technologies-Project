@@ -1,6 +1,16 @@
 var GenerisiRasporede = (function() {
 
     var iscrtajRaspored = function(div, dani, satPocetak, satKraj) {
+        function generisiID(div, dan, vrijeme) {
+            let id = div.id + "-" + dan.toLowerCase() + "-";
+            if(vrijeme - Number.parseInt(vrijeme) < 0.5) {
+                id += vrijeme.toString();
+            } else {
+                id += "pola-" + (Number.parseInt(vrijeme) + 1).toString();
+            }
+            return id;
+        };
+
         if(satPocetak >= satKraj || satPocetak < 0 || satPocetak > 24 || satKraj < 0 ||
             satKraj > 24 || !Number.isInteger(satPocetak) || !Number.isInteger(satKraj)) {
             div.innerHTML += "Greška";
@@ -69,7 +79,18 @@ var GenerisiRasporede = (function() {
         kod += "</table>";
         div.innerHTML += kod;
     };
+
     var dodajAktivnost = function(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) {
+        function generisiID(div, dan, vrijeme) {
+            let id = div.id + "-" + dan.toLowerCase() + "-";
+            if(vrijeme - Number.parseInt(vrijeme) < 0.5) {
+                id += vrijeme.toString();
+            } else {
+                id += "pola-" + (Number.parseInt(vrijeme) + 1).toString();
+            }
+            return id;
+        };
+
         if(raspored === null || !raspored.innerHTML.includes("<table>")) {
             alert("Greška - raspored nije kreiran!");
             return;
@@ -110,21 +131,12 @@ var GenerisiRasporede = (function() {
             i++;
         }
     };
+    
     return {
         iscrtajRaspored: iscrtajRaspored,
         dodajAktivnost: dodajAktivnost
     };
 }());
-
-function generisiID(div, dan, vrijeme) {
-    let id = div.id + "-" + dan.toLowerCase() + "-";
-    if(vrijeme - Number.parseInt(vrijeme) < 0.5) {
-        id += vrijeme.toString();
-    } else {
-        id += "pola-" + (Number.parseInt(vrijeme) + 1).toString();
-    }
-    return id;
-}
 
 var okvir = document.getElementById("okvir");
 var dani = ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"];
