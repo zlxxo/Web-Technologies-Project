@@ -139,3 +139,6 @@ var GenerisiRasporede = (function() {
         dodajAktivnost: dodajAktivnost
     };
 }());
+
+let okvir = document.getElementById("okvir");
+GenerisiRasporede.iscrtajRaspored(okvir, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 08, 21);
