@@ -5,11 +5,11 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
         return;
     }
 
-    let kod = "";
+    var kod = "";
     kod += "<table>";
-    for (let red = 0; red <= dani.length; red++) {
+    for (var red = 0; red <= dani.length; red++) {
         var dan;
-        let sat = satPocetak;
+        var sat = satPocetak;
         if(red === 0) {
             kod += "<tr class='satnica'>";
         } else {
@@ -17,15 +17,15 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
             dan = dani[red - 1];
         }
         
-        let pola = true;
-        for (let kolona = 0; kolona <= (satKraj - satPocetak)*2; kolona++) {
+        var pola = true;
+        for (var kolona = 0; kolona <= (satKraj - satPocetak)*2; kolona++) {
             if(red === 0) {
                 if(kolona === 0) {
                     kod += "<td class='vrijeme' colspan='3'></td>";
                 } else if(pola) {
                     kod += "<td class='vrijeme' colspan='2'>";
                     if((sat <= 12 && sat%2 === 0) || (sat > 13 && sat < satKraj && sat%2 === 1)) {
-                        let jednocifreni = "";
+                        var jednocifreni = "";
                         if(sat < 10) {
                             jednocifreni += "0"
                         }
@@ -69,7 +69,7 @@ function iscrtajRaspored(div, dani, satPocetak, satKraj) {
 }
 
 function generisiID(div, dan, vrijeme) {
-    let id = div.id + "-" + dan.toLowerCase() + "-";
+    var id = div.id + "-" + dan.toLowerCase() + "-";
     if(vrijeme - Number.parseInt(vrijeme) < 0.5) {
         id += vrijeme.toString();
     } else {
@@ -90,9 +90,9 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
         return;
     }
 
-    let i = 0;
-    for(let vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
-        let id = generisiID(raspored, dan, vrijeme/2);
+    var i = 0;
+    for(var vrijeme = vrijemePocetak*2; vrijeme < vrijemeKraj*2; vrijeme++) {
+        var id = generisiID(raspored, dan, vrijeme/2);
         var polje = document.getElementById(id);
         if(polje != null && polje.innerHTML != "") {
             alert("Greška - već postoji termin u rasporedu u zadanom vremenu!");
@@ -111,7 +111,7 @@ function dodajAktivnost(raspored, naziv, tip, vrijemePocetak, vrijemeKraj, dan) 
             }
             polje.style.backgroundColor = "#dee7f0";
             polje.colSpan = ((vrijemeKraj - vrijemePocetak)*2).toString();
-            let kod = "<div class='cas'><p class='predmet'>" + naziv + "</p><p class='tip'>" + tip + "</p></div>";
+            var kod = "<div class='cas'><p class='predmet'>" + naziv + "</p><p class='tip'>" + tip + "</p></div>";
             polje.innerHTML += kod;
         } else {
             polje.parentNode.removeChild(polje);
