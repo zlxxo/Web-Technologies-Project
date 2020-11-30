@@ -140,5 +140,6 @@ var GenerisiRasporede = (function() {
     };
 }());
 
-let okvir = document.getElementById("okvir");
-GenerisiRasporede.iscrtajRaspored(okvir, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 08, 21);
+/*let okvir = document.getElementById("okvir");
+alert(okvir.innerHTML);
+GenerisiRasporede.iscrtajRaspored(okvir, ["Ponedjeljak", "Utorak", "Srijeda", "Četvrtak", "Petak"], 08, 21);*/
