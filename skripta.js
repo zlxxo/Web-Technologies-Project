@@ -3,10 +3,19 @@ var app = express();
 var path = require('path');
 const PORT = 3000;
 
+// pristup statickim fajlovima preko servera
 app.use(express.static(__dirname + '/'));
 
-
-app.get('/predmeti', function (req, res) {});
+// rute
+app.get('/predmeti', function (req, res) {
+    var predmeti = [{naziv: "WT"},
+                    {naziv: "RMA"},
+                    {naziv: "RG"},
+                    {naziv: "OOI"},
+                    {naziv: "OIS"},
+                    {naziv: "VVS"}];
+    res.send(JSON.stringify(predmeti));
+});
 
 app.get('/aktivnosti', function (req, res) {});
 
@@ -22,5 +31,5 @@ app.delete('/predmet/:naziv', function (req, res) {});
 
 app.delete('/all', function (req, res) {});
 
-// make the server listen to requests
+// server radi na sljedecem portu
 app.listen(PORT);
