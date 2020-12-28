@@ -5,12 +5,6 @@ const PORT = 3000;
 
 app.use(express.static(__dirname + '/'));
 
-/*app.use('', express.static(__dirname + '/aktivnost'));
-app.use('', express.static(__dirname + '/planiranjeNastavnik'));
-app.use('', express.static(__dirname + '/iscrtavanje'));
-app.use('', express.static(__dirname + '/podaciStudent'));
-app.use('', express.static(__dirname + '/raspored'));*/
-
 
 app.get('/predmeti', function (req, res) {});
 
