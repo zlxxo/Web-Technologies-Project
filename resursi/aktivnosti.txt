@@ -1,0 +1,3 @@
+RMA,predavanje,9,12,Ponedjeljak
+RMA,predavanje,9,12,Utorak
+OIS,predavanje,15,18,Srijeda

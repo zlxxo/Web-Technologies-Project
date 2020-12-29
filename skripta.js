@@ -104,7 +104,7 @@ app.post('/aktivnost', function (req, res) {
         let greska = 0;
         // provjera da li se poklapa vrijeme aktivnosti sa nekom koja je vec upisana
         arr.forEach(element => {
-            console.log("linija: " + element);
+            //console.log("linija: " + element);
             if(element == null || element == "") return;
             var linija = element.split(",");
             let naziv1 = linija[0];
@@ -133,7 +133,44 @@ app.post('/aktivnost', function (req, res) {
     });*/
 });
 
-app.delete('/aktivnost/:naziv', function (req, res) {});
+// funkcija za brisanje linija
+const izbrisiLinije = (data, linije = []) => {
+    return data
+        .split('\n')
+        .filter((val, idx) => linije.indexOf(idx) === -1)
+        .join('\n');
+}
+
+app.delete('/aktivnost/:naziv', function (req, res) {
+    let naziv = req.params.naziv;
+    //console.log(req.params);
+    fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
+        if(err) throw err;
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        // trazenje aktivnosti sa nazivom
+        let zaIzbrisati = [];
+        for(let i = 0; i < arr.length; i++) {
+            var element = arr[i];
+            //console.log("linija: " + element);
+            if(!(element == null || element == "")) {
+                var linija = element.split(",");
+                let naziv1 = linija[0];
+                if(naziv == naziv1) {
+                    zaIzbrisati.push(i);
+                }
+            }
+        }
+        if(zaIzbrisati.length > 0) {
+            fs.writeFile('resursi/aktivnosti.txt', izbrisiLinije(procitano, zaIzbrisati), 'utf8', function(err) {
+                if (err) throw err;
+                res.json({message:"Uspješno obrisana aktivnost!"});
+            });
+        } else {
+            res.json({message:"Greška - aktivnost nije obrisana!"});
+        } 
+    });
+});
 
 app.delete('/predmet/:naziv', function (req, res) {});
 
