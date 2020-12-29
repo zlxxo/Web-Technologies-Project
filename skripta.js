@@ -12,39 +12,83 @@ app.use(express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // rute
-var predmeti = [{naziv:"WT"},
+/*var predmeti = [{naziv:"WT"},
                 {naziv:"RMA"},
                 {naziv:"RG"},
                 {naziv:"DM"},
                 {naziv:"OOI"},
                 {naziv:"OIS"},
-                {naziv:"VVS"}];
+                {naziv:"VVS"}];*/
 app.get('/predmeti', function (req, res) {
-    res.send(predmeti);
+    fs.readFile('resursi/predmeti.txt', function(err, buffer) {
+        if(err) throw err;
+        var predmeti = [];
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        arr.forEach(element => {
+            element = element.replace("\r", "");
+            if(element != "") {
+                //console.log(element);
+                predmeti.push({naziv:element});
+            }
+        });
+        res.json(predmeti);
+    });
 });
 
-var aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
+/*var aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
                   {naziv:"WT",tip:"vježbe",pocetak:12,kraj:14,dan:"Ponedjeljak"},
                   {naziv:"RMA",tip:"predavanje",pocetak:14,kraj:17,dan:"Ponedjeljak"},
                   {naziv:"RMA",tip:"vježbe",pocetak:12,kraj:14,dan:"Utorak"},
                   {naziv:"DM",tip:"tutorijal",pocetak:14,kraj:16,dan:"Utorak"},
                   {naziv:"DM",tip:"predavanje",pocetak:16,kraj:18,dan:"Utorak"},
-                  {naziv:"OI",tip:"predavanje",pocetak:12,kraj: 15,dan:"Srijeda"}];
+                  {naziv:"OI",tip:"predavanje",pocetak:12,kraj: 15,dan:"Srijeda"}];*/
 
 app.get('/aktivnosti', function (req, res) {
-    res.send(JSON.stringify(aktivnosti));
+    fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
+        if(err) throw err;
+        var aktivnosti = [];
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        let greska = 0;
+        arr.forEach(element => {
+            if(element != "") {
+                var linija = element.split(",");
+                let naziv = linija[0];
+                let tip = linija[1];
+                let pocetak = Number.parseFloat(linija[2]);
+                let kraj = Number.parseFloat(linija[3]);
+                let dan = linija[4].replace("\r", "");
+                aktivnosti.push({naziv:naziv,tip:tip,pocetak:pocetak,kraj:kraj,dan:dan});
+            }
+        });
+        res.json(aktivnosti);
+    });
 });
 
 app.get('/predmet/:naziv/aktivnost/', function (req, res) {
     let naziv = req.params.naziv;
-    let aktivnosti_predmeta = [];
-    for(let i = 0; i < aktivnosti.length; i++) {
-        let aktivnost = aktivnosti[i];
-        if(aktivnost.naziv == naziv) {
-            aktivnosti_predmeta.push(aktivnost);
-        }
-    }
-    res.send(JSON.stringify(aktivnosti_predmeta));
+    fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
+        if(err) throw err;
+        let aktivnosti_predmeta = [];
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        let greska = 0;
+        arr.forEach(element => {
+            if(element != "") {
+                var linija = element.split(",");
+                let naziv1 = linija[0];
+                let tip = linija[1];
+                let pocetak = Number.parseFloat(linija[2]);
+                let kraj = Number.parseFloat(linija[3]);
+                let dan = linija[4].replace("\r", "");
+                if(naziv == naziv1) {
+                    aktivnosti_predmeta.push({naziv:naziv,tip:tip,pocetak:pocetak,kraj:kraj,dan:dan});
+                }
+            }
+        });
+        res.json(aktivnosti_predmeta);
+    });
 });
 
 app.post('/predmet', function (req, res) {
@@ -58,6 +102,7 @@ app.post('/predmet', function (req, res) {
         var arr = procitano.split("\n");
         let postoji = 0;
         arr.forEach(element => {
+            element = element.replace("\r", "");
             if(element == predmet) {
                 postoji++;
             }
@@ -111,7 +156,7 @@ app.post('/aktivnost', function (req, res) {
             let tip1 = linija[1];
             let pocetak1 = Number.parseFloat(linija[2]);
             let kraj1 = Number.parseFloat(linija[3]);
-            let dan1 = linija[4];
+            let dan1 = linija[4].replace("\r", "");
             if(dan == dan1 && presjek(pocetak, kraj, pocetak1, kraj1)) {
                 greska++;
             }
@@ -183,6 +228,7 @@ app.delete('/predmet/:naziv', function (req, res) {
             var element = arr[i];
             //console.log("linija: " + element);
             if(element != "") {
+                element = element.replace("\r", "");
                 if(naziv == element) {
                     zaIzbrisati.push(i);
                     break;
