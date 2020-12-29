@@ -96,10 +96,41 @@ app.post('/aktivnost', function (req, res) {
     }
     //console.log(presjek(12, 15, pocetak, kraj));
     let novaLinija = naziv + "," + tip + "," + pocetak + "," + kraj + "," + dan + "\n";
+
+    fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
+        if(err) throw err;
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        let greska = 0;
+        // provjera da li se poklapa vrijeme aktivnosti sa nekom koja je vec upisana
+        arr.forEach(element => {
+            console.log("linija: " + element);
+            if(element == null || element == "") return;
+            var linija = element.split(",");
+            let naziv1 = linija[0];
+            let tip1 = linija[1];
+            let pocetak1 = Number.parseFloat(linija[2]);
+            let kraj1 = Number.parseFloat(linija[3]);
+            let dan1 = linija[4];
+            if(dan == dan1 && presjek(pocetak, kraj, pocetak1, kraj1)) {
+                greska++;
+            }
+        });
+        if(greska > 0) {
+            res.json({message:"Aktivnost nije validna!"});
+            return;
+        }
+
+        fs.appendFile('resursi/aktivnosti.txt', novaLinija, function(err) {
+            if(err) throw err;
+            res.json({message:"Uspješno dodana aktivnost!"});
+        }); 
+    });
+    /*
     fs.appendFile('resursi/aktivnosti.txt', novaLinija, function(err) {
         if(err) throw err;
         res.json({message:"Uspješno dodana aktivnost!"});
-    });
+    });*/
 });
 
 app.delete('/aktivnost/:naziv', function (req, res) {});
