@@ -175,9 +175,42 @@ app.delete('/aktivnost/:naziv', function (req, res) {
     });
 });
 
-app.delete('/predmet/:naziv', function (req, res) {});
+app.delete('/predmet/:naziv', function (req, res) {
+    let naziv = req.params.naziv;
+    //console.log(req.params);
+    fs.readFile('resursi/predmeti.txt', function(err, buffer) {
+        if(err) throw err;
+        var procitano = buffer.toString("utf-8");
+        var arr = procitano.split("\n");
+        // trazenje aktivnosti sa nazivom
+        let zaIzbrisati = [];
+        for(let i = 0; i < arr.length; i++) {
+            var element = arr[i];
+            //console.log("linija: " + element);
+            if(!(element == null || element == "")) {
+                if(naziv == element) {
+                    zaIzbrisati.push(i);
+                    break;
+                }
+            }
+        }
+        if(zaIzbrisati.length > 0) {
+            fs.writeFile('resursi/predmeti.txt', izbrisiLinije(procitano, zaIzbrisati), 'utf8', function(err) {
+                if (err) {
+                    res.json({message:"Greška - predmet nije obrisan!"});
+                    throw err;
+                }
+                res.json({message:"Uspješno obrisan predmet!"});
+            });
+        } else {
+            res.json({message:"Greška - predmet nije obrisan!"});
+        } 
+    });
+});
 
-app.delete('/all', function (req, res) {});
+app.delete('/all', function (req, res) {
+    
+});
 
 // server radi na sljedecem portu
 app.listen(PORT);
