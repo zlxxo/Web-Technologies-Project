@@ -126,11 +126,6 @@ app.post('/aktivnost', function (req, res) {
             res.json({message:"Uspješno dodana aktivnost!"});
         }); 
     });
-    /*
-    fs.appendFile('resursi/aktivnosti.txt', novaLinija, function(err) {
-        if(err) throw err;
-        res.json({message:"Uspješno dodana aktivnost!"});
-    });*/
 });
 
 // funkcija za brisanje linija
@@ -153,7 +148,7 @@ app.delete('/aktivnost/:naziv', function (req, res) {
         for(let i = 0; i < arr.length; i++) {
             var element = arr[i];
             //console.log("linija: " + element);
-            if(!(element == null || element == "")) {
+            if(element != "") {
                 var linija = element.split(",");
                 let naziv1 = linija[0];
                 if(naziv == naziv1) {
@@ -187,7 +182,7 @@ app.delete('/predmet/:naziv', function (req, res) {
         for(let i = 0; i < arr.length; i++) {
             var element = arr[i];
             //console.log("linija: " + element);
-            if(!(element == null || element == "")) {
+            if(element != "") {
                 if(naziv == element) {
                     zaIzbrisati.push(i);
                     break;
@@ -209,7 +204,19 @@ app.delete('/predmet/:naziv', function (req, res) {
 });
 
 app.delete('/all', function (req, res) {
-    
+    fs.writeFile('resursi/predmeti.txt', "", 'utf8', function(err) {
+        if (err) {
+            res.json({message:"Greška - sadržaj datoteka nije moguće obrisati!"});
+            throw err;
+        }
+        fs.writeFile('resursi/aktivnosti.txt', "", 'utf8', function(err) {
+            if (err) {
+                res.json({message:"Greška - sadržaj datoteka nije moguće obrisati!"});
+                throw err;
+            }
+            res.json({message:"Uspješno obrisan sadržaj datoteka!"});
+        });
+    });
 });
 
 // server radi na sljedecem portu
