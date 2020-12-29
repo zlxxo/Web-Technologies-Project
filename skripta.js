@@ -163,7 +163,10 @@ app.delete('/aktivnost/:naziv', function (req, res) {
         }
         if(zaIzbrisati.length > 0) {
             fs.writeFile('resursi/aktivnosti.txt', izbrisiLinije(procitano, zaIzbrisati), 'utf8', function(err) {
-                if (err) throw err;
+                if (err) {
+                    res.json({message:"Greška - aktivnost nije obrisana!"});
+                    throw err;
+                }
                 res.json({message:"Uspješno obrisana aktivnost!"});
             });
         } else {
