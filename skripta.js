@@ -20,7 +20,7 @@ var predmeti = [{naziv:"WT"},
                 {naziv:"OIS"},
                 {naziv:"VVS"}];
 app.get('/predmeti', function (req, res) {
-    res.send(JSON.stringify(predmeti));
+    res.send(predmeti);
 });
 
 var aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
@@ -73,7 +73,34 @@ app.post('/predmet', function (req, res) {
     });
 });
 
-app.post('/aktivnost', function (req, res) {});
+function presjek(Apocetak, Akraj, Bpocetak, Bkraj) {
+    let pocetak = (Apocetak > Bpocetak) ? Apocetak : Bpocetak;
+    let kraj = (Akraj < Bkraj) ? Akraj : Bkraj;
+    if(pocetak >= kraj) return false;
+    return true;
+}
+
+app.post('/aktivnost', function (req, res) {
+    let tijelo = req.body;
+    let naziv = tijelo["naziv"];
+    let tip = tijelo["tip"];
+    let pocetak = Number.parseFloat(tijelo["pocetak"]);
+    let kraj = Number.parseFloat(tijelo["kraj"]);
+    let dan = tijelo["dan"];
+    //console.log('Got body:', tijelo);
+    if(pocetak < 0 || kraj > 24 || pocetak >= kraj ||
+        !(Number.isInteger(pocetak) || Number.isInteger(pocetak*2)) ||
+        !(Number.isInteger(kraj) || Number.isInteger(kraj*2))) {
+        res.json({message:"Aktivnost nije validna!"});
+        return;
+    }
+    //console.log(presjek(12, 15, pocetak, kraj));
+    let novaLinija = naziv + "," + tip + "," + pocetak + "," + kraj + "," + dan + "\n";
+    fs.appendFile('resursi/aktivnosti.txt', novaLinija, function(err) {
+        if(err) throw err;
+        res.json({message:"Uspješno dodana aktivnost!"});
+    });
+});
 
 app.delete('/aktivnost/:naziv', function (req, res) {});
 
