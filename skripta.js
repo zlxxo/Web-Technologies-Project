@@ -1,11 +1,15 @@
 const express = require('express');
 var app = express();
+const bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
 const PORT = 3000;
 
 // pristup statickim fajlovima preko servera
 app.use(express.static(__dirname + '/'));
+
+// za čitanje tijela zahtjeva
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // rute
 var predmeti = [{naziv:"WT"},
@@ -45,7 +49,8 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
 
 app.post('/predmet', function (req, res) {
     let tijelo = req.body;
-    let predmet = "RMA"; //tijelo['naziv'];
+    let predmet = tijelo["naziv"];
+    //console.log('Got body:', tijelo);
     let novaLinija = predmet + "\n";
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
         if(err) throw err;
