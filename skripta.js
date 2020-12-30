@@ -73,7 +73,6 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
         let aktivnosti_predmeta = [];
         var procitano = buffer.toString("utf-8");
         var arr = procitano.split("\n");
-        let greska = 0;
         arr.forEach(element => {
             if(element != "") {
                 var linija = element.split(",");
