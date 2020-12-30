@@ -32,7 +32,7 @@ describe('Testiranje - spirala 3', function() {
                           request(options, function (error, response) {
                             if (error) throw new Error(error);
                             //console.log(JSON.parse(response.body), izlaz);
-                            assert.equal(JSON.parse(response.body).message, izlaz.message);
+                            assert.deepEqual(JSON.parse(response.body), izlaz);
                           });
                     });
                 });
