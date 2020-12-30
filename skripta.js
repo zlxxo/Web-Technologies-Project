@@ -1,8 +1,8 @@
 const express = require('express');
-var app = express();
+const app = express();
 const bodyParser = require('body-parser');
-var path = require('path');
-var fs = require('fs');
+const path = require('path');
+const fs = require('fs');
 const PORT = 3000;
 
 // pristup statickim fajlovima preko servera
@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // rute
-/*var predmeti = [{naziv:"WT"},
+/*let predmeti = [{naziv:"WT"},
                 {naziv:"RMA"},
                 {naziv:"RG"},
                 {naziv:"DM"},
@@ -22,9 +22,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/predmeti', function (req, res) {
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
         if(err) throw err;
-        var predmeti = [];
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let predmeti = [];
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         arr.forEach(element => {
             element = element.replace("\r", "");
             if(element != "") {
@@ -36,7 +36,7 @@ app.get('/predmeti', function (req, res) {
     });
 });
 
-/*var aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
+/*let aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
                   {naziv:"WT",tip:"vježbe",pocetak:12,kraj:14,dan:"Ponedjeljak"},
                   {naziv:"RMA",tip:"predavanje",pocetak:14,kraj:17,dan:"Ponedjeljak"},
                   {naziv:"RMA",tip:"vježbe",pocetak:12,kraj:14,dan:"Utorak"},
@@ -47,13 +47,13 @@ app.get('/predmeti', function (req, res) {
 app.get('/aktivnosti', function (req, res) {
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
-        var aktivnosti = [];
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let aktivnosti = [];
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         let greska = 0;
         arr.forEach(element => {
             if(element != "") {
-                var linija = element.split(",");
+                let linija = element.split(",");
                 let naziv = linija[0];
                 let tip = linija[1];
                 let pocetak = Number.parseFloat(linija[2]);
@@ -71,11 +71,11 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
         let aktivnosti_predmeta = [];
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         arr.forEach(element => {
             if(element != "") {
-                var linija = element.split(",");
+                let linija = element.split(",");
                 let naziv1 = linija[0];
                 let tip = linija[1];
                 let pocetak = Number.parseFloat(linija[2]);
@@ -91,14 +91,15 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
 });
 
 app.post('/predmet', function (req, res) {
-    let tijelo = req.body;
-    let predmet = tijelo["naziv"];
-    //console.log('Got body:', tijelo);
+    let tijelo = req.headers;
+    let predmet = tijelo.naziv;
+    console.log('Got body:', tijelo);
+    //console.log("zahtjev :", req);
     let novaLinija = predmet + "\n";
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
         if(err) throw err;
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         let postoji = 0;
         arr.forEach(element => {
             element = element.replace("\r", "");
@@ -125,13 +126,13 @@ function presjek(Apocetak, Akraj, Bpocetak, Bkraj) {
 }
 
 app.post('/aktivnost', function (req, res) {
-    let tijelo = req.body;
-    let naziv = tijelo["naziv"];
-    let tip = tijelo["tip"];
-    let pocetak = Number.parseFloat(tijelo["pocetak"]);
-    let kraj = Number.parseFloat(tijelo["kraj"]);
-    let dan = tijelo["dan"];
-    //console.log('Got body:', tijelo);
+    let tijelo = req.headers;
+    let naziv = tijelo.naziv;
+    let tip = tijelo.tip;
+    let pocetak = Number.parseFloat(tijelo.pocetak);
+    let kraj = Number.parseFloat(tijelo.kraj);
+    let dan = tijelo.dan;
+    console.log('Got body:', tijelo);
     if(pocetak < 0 || kraj > 24 || pocetak >= kraj ||
         !(Number.isInteger(pocetak) || Number.isInteger(pocetak*2)) ||
         !(Number.isInteger(kraj) || Number.isInteger(kraj*2))) {
@@ -143,14 +144,14 @@ app.post('/aktivnost', function (req, res) {
 
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         let greska = 0;
         // provjera da li se poklapa vrijeme aktivnosti sa nekom koja je vec upisana
         arr.forEach(element => {
             //console.log("linija: " + element);
             if(element == null || element == "") return;
-            var linija = element.split(",");
+            let linija = element.split(",");
             let naziv1 = linija[0];
             let tip1 = linija[1];
             let pocetak1 = Number.parseFloat(linija[2]);
@@ -185,15 +186,15 @@ app.delete('/aktivnost/:naziv', function (req, res) {
     //console.log(req.params);
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         // trazenje aktivnosti sa nazivom
         let zaIzbrisati = [];
         for(let i = 0; i < arr.length; i++) {
-            var element = arr[i];
+            let element = arr[i];
             //console.log("linija: " + element);
             if(element != "") {
-                var linija = element.split(",");
+                let linija = element.split(",");
                 let naziv1 = linija[0];
                 if(naziv == naziv1) {
                     zaIzbrisati.push(i);
@@ -219,12 +220,12 @@ app.delete('/predmet/:naziv', function (req, res) {
     //console.log(req.params);
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
         if(err) throw err;
-        var procitano = buffer.toString("utf-8");
-        var arr = procitano.split("\n");
+        let procitano = buffer.toString("utf-8");
+        let arr = procitano.split("\n");
         // trazenje aktivnosti sa nazivom
         let zaIzbrisati = [];
         for(let i = 0; i < arr.length; i++) {
-            var element = arr[i];
+            let element = arr[i];
             //console.log("linija: " + element);
             if(element != "") {
                 element = element.replace("\r", "");
