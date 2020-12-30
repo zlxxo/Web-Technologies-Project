@@ -1,6 +1,7 @@
-const assert = require('assert');
+var assert = require('assert');
 var path = require('path');
 var fs = require('fs');
+var request = require('request');
 const PORT = 3000;
 
 describe('Testiranje - spirala 3', function() {
@@ -16,19 +17,31 @@ describe('Testiranje - spirala 3', function() {
                 var ruta = linija[1];
                 var ulaz = JSON.parse(linija[2]);
                 var izlaz = JSON.parse(linija[3]);
-                console.log("ulaz ", ulaz);
-                console.log("izlaz ", izlaz);
-                describe('', function() {
-                    it('', function() {
-                        assert.equal(-1, -1);
+                //console.log("ulaz ", ulaz);
+                //console.log("izlaz ", izlaz);
+                var metoda = operacija + " " + ruta;
+                describe(metoda, function() {
+                    var poruka = "ocekivan izlaz: " + JSON.stringify(izlaz);
+                    it(poruka, function() {
+                        var options = {
+                            'method': operacija,
+                            'url': 'http://localhost:' + PORT + ruta,
+                            'headers': {
+                            }
+                          };
+                          request(options, function (error, response) {
+                            if (error) throw new Error(error);
+                            //console.log(JSON.parse(response.body), izlaz);
+                            assert.equal(JSON.parse(response.body).message, izlaz.message);
+                          });
                     });
                 });
             }
         }
     });
 
-    describe('potrebno da bi se mogli pokrenuti testovi procitani iz fajla', function() {
-        it('potrebno da bi se mogli pokrenuti testovi procitani iz fajla', function() {
+    describe('potrebno da bi se mogli pokrenuti testovi pročitani iz fajla', function() {
+        it('potrebno da bi se mogli pokrenuti testovi pročitani iz fajla', function() {
         });
     });
 });
