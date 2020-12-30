@@ -1,3 +1,4 @@
 DELETE;/all;null;{"message":"Uspješno obrisan sadržaj datoteka!"}
 GET;/predmeti;null;[]
 GET;/aktivnosti;null;[]
+GET;/predmet/:naziv/aktivnost/;null;[]
