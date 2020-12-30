@@ -14,11 +14,12 @@ describe('Testiranje - spirala 3', function() {
                 var linija = element.split(";");
                 var operacija = linija[0];
                 var ruta = linija[1];
-                var ulaz = linija[2];
-                var izlaz = linija[3];
-                var s = operacija + "," + ruta + "," + ulaz + "," + izlaz;
-                describe(s, function() {
-                    it(s, function() {
+                var ulaz = JSON.parse(linija[2]);
+                var izlaz = JSON.parse(linija[3]);
+                console.log("ulaz ", ulaz);
+                console.log("izlaz ", izlaz);
+                describe('', function() {
+                    it('', function() {
                         assert.equal(-1, -1);
                     });
                 });
