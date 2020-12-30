@@ -33,6 +33,7 @@ app.get('/predmeti', function (req, res) {
             }
         });
         res.json(predmeti);
+        console.log(predmeti);
     });
 });
 
@@ -63,6 +64,7 @@ app.get('/aktivnosti', function (req, res) {
             }
         });
         res.json(aktivnosti);
+        console.log(aktivnosti);
     });
 });
 

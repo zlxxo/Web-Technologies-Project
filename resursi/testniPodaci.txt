@@ -5,3 +5,6 @@ GET;/predmet/:naziv/aktivnost/;null;[]
 POST;/predmet;{"naziv":"RPR"};{"message":"Uspješno dodan predmet!"}
 GET;/predmeti;null;[{"naziv":"RPR"}]
 POST;/aktivnost;{"naziv":"RPR","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"};{"message":"Uspješno dodana aktivnost!"}
+GET;/aktivnosti;null;[{"naziv":"RPR","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"}]
+POST;/aktivnost;{"naziv":"RPR","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"};{"message":"Aktivnost nije validna!"}
+GET;/aktivnosti;null;[{"naziv":"RPR","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"}]
