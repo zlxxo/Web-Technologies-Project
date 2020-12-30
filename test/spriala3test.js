@@ -35,7 +35,7 @@ describe('Testiranje - spirala 3', function() {
                             'headers': JSON.parse(ulaz)
                         };
                     }
-                    console.log(options);
+                    //console.log(options);
                     it(poruka, function() {
                         request(options, function (error, response) {
                             if (error) throw new Error(error);

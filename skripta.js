@@ -33,7 +33,7 @@ app.get('/predmeti', function (req, res) {
             }
         });
         res.json(predmeti);
-        console.log(predmeti);
+        //console.log(predmeti);
     });
 });
 
@@ -64,7 +64,7 @@ app.get('/aktivnosti', function (req, res) {
             }
         });
         res.json(aktivnosti);
-        console.log(aktivnosti);
+        //console.log(aktivnosti);
     });
 });
 
@@ -95,7 +95,7 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
 app.post('/predmet', function (req, res) {
     let tijelo = req.headers;
     let predmet = tijelo.naziv;
-    console.log('Got body:', tijelo);
+    //console.log('Got body:', tijelo);
     //console.log("zahtjev :", req);
     let novaLinija = predmet + "\n";
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
@@ -134,7 +134,7 @@ app.post('/aktivnost', function (req, res) {
     let pocetak = Number.parseFloat(tijelo.pocetak);
     let kraj = Number.parseFloat(tijelo.kraj);
     let dan = tijelo.dan;
-    console.log('Got body:', tijelo);
+    //console.log('Got body:', tijelo);
     if(pocetak < 0 || kraj > 24 || pocetak >= kraj ||
         !(Number.isInteger(pocetak) || Number.isInteger(pocetak*2)) ||
         !(Number.isInteger(kraj) || Number.isInteger(kraj*2))) {
