@@ -135,7 +135,8 @@ app.post('/aktivnost', function (req, res) {
     let kraj = Number.parseFloat(tijelo.kraj);
     let dan = tijelo.dan;
     //console.log('Got body:', tijelo);
-    if(pocetak < 0 || kraj > 24 || pocetak >= kraj ||
+    //console.log("zahtjev :", req);
+    if(pocetak < 8 || kraj > 20 || pocetak >= kraj ||
         !(Number.isInteger(pocetak) || Number.isInteger(pocetak*2)) ||
         !(Number.isInteger(kraj) || Number.isInteger(kraj*2))) {
         res.json({message:"Aktivnost nije validna!"});

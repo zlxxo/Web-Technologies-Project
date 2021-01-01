@@ -24,15 +24,15 @@ describe('Testiranje - spirala 3', function() {
                 describe(metoda, function() {
                     let poruka = "ocekivan izlaz: " + izlaz;
                     let options = {
-                        'method': operacija,
-                        'url': 'http://localhost:' + PORT + ruta,
-                        'headers': {}
+                        "method": operacija,
+                        "url": 'http://localhost:' + PORT + ruta,
+                        "headers": {}
                     };
                     if(operacija == "POST") {
                         options = {
-                            'method': operacija,
-                            'url': 'http://localhost:' + PORT + ruta,
-                            'headers': JSON.parse(ulaz)
+                            "method": operacija,
+                            "url": 'http://localhost:' + PORT + ruta,
+                            "headers": JSON.parse(ulaz)
                         };
                     }
                     //console.log(options);
