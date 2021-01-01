@@ -1,3 +1,3 @@
 function unesiRaspored() {
-    console.log("radi");
+    alert("radi");
 }
