@@ -11,7 +11,7 @@ POST;/predmet;{"naziv":"RMA"};{"message":"Uspješno dodan predmet!"}
 GET;/predmeti;null;[{"naziv":"WT"},{"naziv":"RPR"},{"naziv":"RMA"}]
 POST;/aktivnost;{"naziv":"WT","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"};{"message":"Uspješno dodana aktivnost!"}
 GET;/aktivnosti;null;[{"naziv":"WT","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"}]
-POST;/aktivnost;{"naziv":"WT","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"};{"message":"Aktivnost nije validna!"}
+POST;/aktivnost;{"naziv":"WT","tip":"predavanje","pocetak":15,"kraj":12,"dan":"Ponedjeljak"};{"message":"Aktivnost nije validna!"}
 GET;/aktivnosti;null;[{"naziv":"WT","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"}]
 GET;/predmet/WT/aktivnost/;null;[{"naziv":"WT","tip":"predavanje","pocetak":9,"kraj":12,"dan":"Ponedjeljak"}]
 POST;/aktivnost;{"naziv":"RMA","tip":"predavanje","pocetak":15,"kraj":18,"dan":"Ponedjeljak"};{"message":"Uspješno dodana aktivnost!"}

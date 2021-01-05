@@ -8,8 +8,9 @@ const PORT = 3000;
 // pristup statickim fajlovima preko servera
 app.use(express.static(__dirname + '/'));
 
-// za čitanje tijela zahtjeva
+
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // rute
 /*let predmeti = [{naziv:"WT"},
@@ -93,8 +94,8 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
 });
 
 app.post('/predmet', function (req, res) {
-    let tijelo = req.headers;
-    let predmet = tijelo.naziv;
+    let tijelo = req.body;
+    let predmet = tijelo["naziv"];
     //console.log('Got body:', tijelo);
     //console.log("zahtjev :", req);
     let novaLinija = predmet + "\n";
@@ -128,12 +129,12 @@ function presjek(Apocetak, Akraj, Bpocetak, Bkraj) {
 }
 
 app.post('/aktivnost', function (req, res) {
-    let tijelo = req.headers;
-    let naziv = tijelo.naziv;
-    let tip = tijelo.tip;
-    let pocetak = Number.parseFloat(tijelo.pocetak);
-    let kraj = Number.parseFloat(tijelo.kraj);
-    let dan = tijelo.dan;
+    let tijelo = req.body;
+    let naziv = tijelo["naziv"];
+    let tip = tijelo["tip"];
+    let pocetak = Number.parseFloat(tijelo["pocetak"]);
+    let kraj = Number.parseFloat(tijelo["kraj"]);
+    let dan = tijelo["dan"];
     //console.log('Got body:', tijelo);
     //console.log("zahtjev :", req);
     if(pocetak < 8 || kraj > 20 || pocetak >= kraj ||
@@ -269,4 +270,5 @@ app.delete('/all', function (req, res) {
 });
 
 // server radi na sljedecem portu
-app.listen(PORT);
+var server = app.listen(PORT);
+module.exports = server
