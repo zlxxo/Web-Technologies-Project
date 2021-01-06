@@ -25,6 +25,15 @@ window.onload = () => {
 
 
 function unesiRaspored() {
-    alert(predmeti);
-    alert(aktivnosti);
+    let naziv = document.getElementById('naziv-predmeta').value;
+    alert(naziv);
+    let tip = document.getElementById("tip").value;
+    alert(tip);
+    let pocetak = document.getElementById("vrijeme-pocetka").value;
+    alert(pocetak);
+    alert(pocetak[2]);
+    let kraj = document.getElementById("vrijeme-kraja").value;
+    alert(kraj);
+    let dan = document.getElementById("dan").value;
+    alert(dan);
 }
