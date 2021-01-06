@@ -54,5 +54,39 @@ function unesiRaspored() {
         } else {
             kraj = parseInt(pocetak);
         }
+
+        if(!predmeti.includes(naziv)) {
+            var data = JSON.stringify({"naziv":naziv});
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            
+            xhr.addEventListener("readystatechange", function() {
+                if(this.readyState === 4) {
+                    console.log(this.responseText);
+                }
+            });
+            
+            xhr.open("POST", "http://localhost:3000/predmet");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            
+            xhr.send(data);
+        }
+
+        var data2 = JSON.stringify({"naziv":naziv,"tip":tip,"pocetak":pocetak,"kraj":kraj,"dan":dan});
+
+        var xhr2 = new XMLHttpRequest();
+        xhr2.withCredentials = true;
+        
+        xhr2.addEventListener("readystatechange", function() {
+            if(this.readyState === 4) {
+                console.log(this.responseText);
+            }
+        });
+        
+        xhr2.open("POST", "http://localhost:3000/aktivnost");
+        xhr2.setRequestHeader("Content-Type", "application/json");
+        
+        xhr2.send(data2);
     }    
 }
