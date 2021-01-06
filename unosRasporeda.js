@@ -26,14 +26,33 @@ window.onload = () => {
 
 function unesiRaspored() {
     let naziv = document.getElementById('naziv-predmeta').value;
-    alert(naziv);
     let tip = document.getElementById("tip").value;
-    alert(tip);
     let pocetak = document.getElementById("vrijeme-pocetka").value;
-    alert(pocetak);
-    alert(pocetak[2]);
     let kraj = document.getElementById("vrijeme-kraja").value;
-    alert(kraj);
     let dan = document.getElementById("dan").value;
-    alert(dan);
+
+    if(naziv != null && naziv != "" && tip != null && pocetak != null && kraj != null && dan != null) {
+        let greska = false;
+        if(!(pocetak[3] == 3 || pocetak[3] == 0) || pocetak[4] != 0) {
+            alert("Vrijeme početka aktivnosti nije u ispravnom formatu!");
+            return;
+        }
+
+        if(!(kraj[3] == 3 || kraj[3] == 0) || kraj[4] != 0) {
+            alert("Vrijeme kraja aktivnosti nije u ispravnom formatu!");
+            return;
+        }
+
+        if(pocetak[3] == 3) {
+            pocetak = parseFloat(pocetak) + 0.5;
+        } else {
+            pocetak = parseInt(pocetak);
+        }
+
+        if(kraj[3] == 3) {
+            kraj = parseFloat(pocetak) + 0.5;
+        } else {
+            kraj = parseInt(pocetak);
+        }
+    }    
 }
