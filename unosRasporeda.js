@@ -1,27 +1,30 @@
-var request = require('request');
+let predmeti = [];
+let aktivnosti = [];
 
-function unesiRaspored() {
-    let predmeti = [];
-    let aktivnost = [];
-    try {
-        predmeti = posaljiZahtjev("GET", "/predmeti", {});
-        alert(predmeti);
-    } catch(err) {
-        alert(err);
-        //alert("Ne mogu se pročitati predmeti iz fajla!");
-    }
+window.onload = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            predmeti = this.responseText;
+        }
+    });
+    xhr.open("GET", "http://localhost:3000/predmeti");
+    xhr.send();
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.withCredentials = true;
+    xhr2.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            aktivnosti = this.responseText;
+        }
+    });
+    xhr2.open("GET", "http://localhost:3000/aktivnosti");
+    xhr2.send();    
 }
 
-function posaljiZahtjev(operacija, ruta, ulaz) {
-    let options = {
-        "method": operacija,
-        "url": 'http://localhost:' + 3000 + ruta,
-        "headers": ulaz
-    };
-    let izlaz = null;
-    request(options, function (error, response) {
-        if (error) throw new Error(error);
-        izlaz = response;
-    });
-    return izlaz;
+
+function unesiRaspored() {
+    alert(predmeti);
+    alert(aktivnosti);
 }
