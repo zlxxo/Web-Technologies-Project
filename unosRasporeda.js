@@ -50,9 +50,9 @@ function unesiRaspored() {
         }
 
         if(kraj[3] == 3) {
-            kraj = parseFloat(pocetak) + 0.5;
+            kraj = parseFloat(kraj) + 0.5;
         } else {
-            kraj = parseInt(pocetak);
+            kraj = parseInt(kraj);
         }
 
         if(!predmeti.includes(naziv)) {
