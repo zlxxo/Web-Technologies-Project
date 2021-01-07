@@ -32,7 +32,6 @@ function unesiRaspored() {
     let dan = document.getElementById("dan").value;
 
     if(naziv != null && naziv != "" && tip != null && pocetak != null && kraj != null && dan != null) {
-        let greska = false;
         if(!(pocetak[3] == 3 || pocetak[3] == 0) || pocetak[4] != 0) {
             alert("Vrijeme početka aktivnosti nije u ispravnom formatu!");
             return;
@@ -55,38 +54,49 @@ function unesiRaspored() {
             kraj = parseInt(kraj);
         }
 
+        let greska = false;
         if(!predmeti.includes(naziv)) {
-            var data = JSON.stringify({"naziv":naziv});
-
+            var data = JSON.stringify({naziv:naziv});
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
-            
             xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
-                    console.log(this.responseText);
+                    if(this.responseText != JSON.stringify({message:"Uspješno dodan predmet!"})) {
+                        greska = true;
+                        alert("Greška! Neuspješno upisivanje novog predmeta!");
+                    }
                 }
             });
-            
             xhr.open("POST", "http://localhost:3000/predmet");
             xhr.setRequestHeader("Content-Type", "application/json");
-            
             xhr.send(data);
         }
 
-        var data2 = JSON.stringify({"naziv":naziv,"tip":tip,"pocetak":pocetak,"kraj":kraj,"dan":dan});
-
-        var xhr2 = new XMLHttpRequest();
-        xhr2.withCredentials = true;
-        
-        xhr2.addEventListener("readystatechange", function() {
-            if(this.readyState === 4) {
-                console.log(this.responseText);
-            }
-        });
-        
-        xhr2.open("POST", "http://localhost:3000/aktivnost");
-        xhr2.setRequestHeader("Content-Type", "application/json");
-        
-        xhr2.send(data2);
+        if(!greska){
+            var data2 = JSON.stringify({naziv:naziv,tip:tip,pocetak:pocetak,kraj:kraj,dan:dan});
+            var xhr2 = new XMLHttpRequest();
+            xhr2.withCredentials = true;
+            xhr2.addEventListener("readystatechange", function() {
+                if(this.readyState === 4) {
+                    if(this.responseText != JSON.stringify({message:"Uspješno dodana aktivnost!"})) {
+                        var xhr3 = new XMLHttpRequest();
+                        xhr3.withCredentials = true;
+                        xhr3.addEventListener("readystatechange", function() {
+                          if(this.readyState === 4) {
+                            console.log(this.responseText);
+                          }
+                        });
+                        xhr3.open("DELETE", "http://localhost:3000/predmet/" + naziv);
+                        xhr3.send();
+                        alert("Greška! Neuspješno upisivanje aktivnosti!");
+                    } else {
+                        alert("Uspješno upisana aktivnost!");
+                    }
+                }
+            });
+            xhr2.open("POST", "http://localhost:3000/aktivnost");
+            xhr2.setRequestHeader("Content-Type", "application/json");
+            xhr2.send(data2);
+        }
     }    
 }

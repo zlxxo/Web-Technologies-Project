@@ -135,7 +135,7 @@ app.post('/aktivnost', function (req, res) {
     let pocetak = Number.parseFloat(tijelo["pocetak"]);
     let kraj = Number.parseFloat(tijelo["kraj"]);
     let dan = tijelo["dan"];
-    console.log('Got body:', tijelo);
+    //console.log('Got body:', tijelo);
     //console.log("zahtjev :", req);
     if(pocetak < 8 || kraj > 20 || pocetak >= kraj ||
         !(Number.isInteger(pocetak) || Number.isInteger(pocetak*2)) ||
