@@ -276,9 +276,9 @@ module.exports = server
 const sequelize = require('./baza.js');
 
 sequelize.authenticate()
-    .then(() => {
-        console.log("Konekcija sa bazom uspješna!");
-    })
-    .catch((err) => {
-        console.log("Greška pri konektovanju s bazom!", err);
-    });
+.then(() => {
+    console.log("Konekcija sa bazom uspješna!");
+})
+.catch((err) => {
+    console.log("Greška pri konektovanju s bazom!", err);
+});
