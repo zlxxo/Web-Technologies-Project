@@ -282,3 +282,6 @@ sequelize.authenticate()
 .catch((err) => {
     console.log("Greška pri konektovanju s bazom!", err);
 });
+
+const Aktivnost = sequelize.import(__dirname + "/modeli/aktivnost.js");
+Aktivnost.sync();
