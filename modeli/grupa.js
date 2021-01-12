@@ -2,8 +2,8 @@ const Sequelize = require("sequelize");
 const sequelize = require("../baza.js");
  
 module.exports = function (sequelize, DataTypes) {
-    const Predmet = sequelize.define('Predmet', {
+    const Grupa = sequelize.define('Grupa', {
        naziv: Sequelize.STRING
    });
-   return Predmet;
+   return Grupa;
 }
