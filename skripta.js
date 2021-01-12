@@ -273,13 +273,12 @@ app.delete('/all', function (req, res) {
 var server = app.listen(PORT);
 module.exports = server
 
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://root:root@localhost:3306/wt2018232');
+const sequelize = require('./baza.js');
 
 sequelize.authenticate()
     .then(() => {
-        console.log("Konektovana");
+        console.log("Konekcija sa bazom uspješna!");
     })
     .catch((err) => {
-        console.log("Greška");
+        console.log("Greška pri konektovanju s bazom!", err);
     });
