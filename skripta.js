@@ -258,22 +258,45 @@ app.delete('/v1/all', function (req, res) {
 const baza = require('./baza.js');
 
 // kreiranje baze
-baza.sequelize.sync({force: true});
+//baza.sequelize.sync({force: true});
+baza.sequelize.sync();
 
-// CRUD rute
-app.get('/v2/aktivnost', function (req, res) {});
-
-app.get('/v2/dan', function (req, res) {});
-
-app.get('/v2/grupa', function (req, res) {});
-
-app.get('/v2/predmet', function (req, res) {
-    res.send();
+// rute za CRUD
+app.get('/v2/aktivnost', function (req, res) {
+    baza.Aktivnost.findAll().then((aktivnosti) => {
+        res.json(aktivnosti);
+    });
 });
 
-app.get('/v2/student', function (req, res) {});
+app.get('/v2/dan', function (req, res) {
+    baza.Dan.findAll().then((dani) => {
+        res.json(dani);
+    });
+});
 
-app.get('/v2/tip', function (req, res) {});
+app.get('/v2/grupa', function (req, res) {
+    baza.Grupa.findAll().then((grupe) => {
+        res.json(grupe);
+    });
+});
+
+app.get('/v2/predmet', function (req, res) {
+    baza.Predmet.findAll().then((predmeti) => {
+        res.json(predmeti);
+    });
+});
+
+app.get('/v2/student', function (req, res) {
+    baza.Student.findAll().then((studenti) => {
+        res.json(studenti);
+    });
+});
+
+app.get('/v2/tip', function (req, res) {
+    baza.Tip.findAll().then((tipovi) => {
+        res.json(tipovi);
+    });
+});
 
 app.post('/v2/aktivnost', function (req, res) {});
 
