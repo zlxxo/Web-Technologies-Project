@@ -298,11 +298,40 @@ app.get('/v2/tip', function (req, res) {
     });
 });
 
-app.post('/v2/aktivnost', function (req, res) {
+app.post('/v2/aktivnost:id', function (req, res) {});
 
+app.post('/v2/dan/:id', function (req, res) {
+    const danId = req.params.id;
+    //console.log("id", danId);
+    const naziv = req.body.naziv;
+    //console.log("body", req.body);
+    baza.Dan.findOne({
+        where: {
+            id: danId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const dan = {
+                id: danId,
+                naziv: naziv
+            };
+            baza.Dan.create(dan).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            const dan = {
+                naziv: naziv
+            };
+            baza.Dan.update(dan, {
+                where: {
+                    id: danId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
 });
-
-app.post('/v2/dan/:id', function (req, res) {});
 
 app.post('/v2/grupa/:id', function (req, res) {});
 
