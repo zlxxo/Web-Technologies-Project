@@ -274,7 +274,11 @@ var server = app.listen(PORT);
 module.exports = server;
 
 // veza sa bazom
-const sequelize = require('./baza.js');
+const baza = require('./baza.js');
+
+// kreiranje baze
+baza.sequelize.sync({force: true});
+/*const sequelize = require('./baza.js');
 
 // provjera konekcije
 sequelize.authenticate().then(() => {
@@ -291,7 +295,7 @@ const Predmet = require('./modeli/predmet.js');
 const Student = require('./modeli/student.js');
 const Tip = require('./modeli/tip.js');
 
-/*
+
 // relacije
 // Predmet 1 - N Grupa
 Predmet.belongsTo(Grupa);
@@ -316,11 +320,11 @@ Tip.hasMany(Aktivnost, {as: 'tipoviAktivnosti'});
 // Student N - M Grupa
 Student.hasMany(Grupa, {as: 'grupe'});
 Grupa.belongsToMany(Student, {through:'StudentskeGrupe', as: 'studentiUGrupama'});
-*/
+
 // kreiranje tabela
 Aktivnost.sync({force:true});
 Dan.sync({force:true});
 Grupa.sync({force:true});
 Predmet.sync({force:true});
 Student.sync({force:true});
-Tip.sync({force:true});
+Tip.sync({force:true});*/
