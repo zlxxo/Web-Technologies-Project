@@ -291,31 +291,32 @@ const Predmet = require('./modeli/predmet.js');
 const Student = require('./modeli/student.js');
 const Tip = require('./modeli/tip.js');
 
-// veze
+/*
+// relacije
 // Predmet 1 - N Grupa
-Grupa.hasMany(Predmet, {as: 'predmeti'});
 Predmet.belongsTo(Grupa);
+Grupa.hasMany(Predmet, {as: 'predmeti'});
 
 // Aktivnost N - 1 Predmet
-Predmet.hasMany(Aktivnost, {as:'aktivnostiPredmeta'});
 Aktivnost.belongsTo(Predmet);
+Predmet.hasMany(Aktivnost, {as:'aktivnostiPredmeta'});
 
 // Aktivnost N - 0 Grupa
-Grupa.hasMany(Aktivnost, {as:'aktivnostiGrupa'});
 Aktivnost.belongsTo(Grupa);
+Grupa.hasMany(Aktivnost, {as:'aktivnostiGrupa'});
 
 // Aktivnost N - 1 Dan
-Dan.hasMany(Aktivnost, {as: 'aktivnostiUDanu'});
 Aktivnost.belongsTo(Dan);
+Dan.hasMany(Aktivnost, {as: 'aktivnostiUDanu'});
 
 // Aktivnost N - 1 Tip
-Tip.hasMany(Aktivnost, {as: 'tipoviAktivnosti'});
 Aktivnost.belongsTo(Tip);
+Tip.hasMany(Aktivnost, {as: 'tipoviAktivnosti'});
 
 // Student N - M Grupa
 Student.hasMany(Grupa, {as: 'grupe'});
-Aktivnost.belongsToMany(Predmet, {through:'StudentskeGrupe'});
-
+Grupa.belongsToMany(Student, {through:'StudentskeGrupe', as: 'studentiUGrupama'});
+*/
 // kreiranje tabela
 Aktivnost.sync({force:true});
 Dan.sync({force:true});
