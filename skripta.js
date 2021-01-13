@@ -285,14 +285,41 @@ sequelize.authenticate().then(() => {
 
 // importovanje modela
 const Aktivnost = require('./modeli/aktivnost.js');
-Aktivnost.sync({force:true});
 const Dan = require('./modeli/dan.js');
-Dan.sync({force:true});
 const Grupa = require('./modeli/grupa.js');
-Grupa.sync({force:true});
 const Predmet = require('./modeli/predmet.js');
-Predmet.sync({force:true});
 const Student = require('./modeli/student.js');
-Student.sync({force:true});
 const Tip = require('./modeli/tip.js');
+
+// veze
+// Predmet 1 - N Grupa
+Grupa.hasMany(Predmet, {as: 'predmeti'});
+Predmet.belongsTo(Grupa);
+
+// Aktivnost N - 1 Predmet
+Predmet.hasMany(Aktivnost, {as:'aktivnostiPredmeta'});
+Aktivnost.belongsTo(Predmet);
+
+// Aktivnost N - 0 Grupa
+Grupa.hasMany(Aktivnost, {as:'aktivnostiGrupa'});
+Aktivnost.belongsTo(Grupa);
+
+// Aktivnost N - 1 Dan
+Dan.hasMany(Aktivnost, {as: 'aktivnostiUDanu'});
+Aktivnost.belongsTo(Dan);
+
+// Aktivnost N - 1 Tip
+Tip.hasMany(Aktivnost, {as: 'tipoviAktivnosti'});
+Aktivnost.belongsTo(Tip);
+
+// Student N - M Grupa
+Student.hasMany(Grupa, {as: 'grupe'});
+Aktivnost.belongsToMany(Predmet, {through:'StudentskeGrupe'});
+
+// kreiranje tabela
+Aktivnost.sync({force:true});
+Dan.sync({force:true});
+Grupa.sync({force:true});
+Predmet.sync({force:true});
+Student.sync({force:true});
 Tip.sync({force:true});
