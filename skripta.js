@@ -254,12 +254,17 @@ app.delete('/v1/all', function (req, res) {
     });
 });
 
-// server radi na sljedecem portu
-var server = app.listen(PORT);
-module.exports = server;
-
 // veza sa bazom
 const baza = require('./baza.js');
 
 // kreiranje baze
 baza.sequelize.sync({force: true});
+
+// CRUD rute
+
+
+
+
+// server radi na sljedecem portu
+var server = app.listen(PORT);
+module.exports = server;
