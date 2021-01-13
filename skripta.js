@@ -261,9 +261,43 @@ const baza = require('./baza.js');
 baza.sequelize.sync({force: true});
 
 // CRUD rute
+app.get('/v2/aktivnost', function (req, res) {});
 
+app.get('/v2/dan', function (req, res) {});
 
+app.get('/v2/grupa', function (req, res) {});
 
+app.get('/v2/predmet', function (req, res) {
+    res.send();
+});
+
+app.get('/v2/student', function (req, res) {});
+
+app.get('/v2/tip', function (req, res) {});
+
+app.post('/v2/aktivnost', function (req, res) {});
+
+app.post('/v2/dan', function (req, res) {});
+
+app.post('/v2/grupa', function (req, res) {});
+
+app.post('/v2/predmet', function (req, res) {});
+
+app.post('/v2/student', function (req, res) {});
+
+app.post('/v2/tip', function (req, res) {});
+
+app.delete('/v2/aktivnost', function (req, res) {});
+
+app.delete('/v2/dan', function (req, res) {});
+
+app.delete('/v2/grupa', function (req, res) {});
+
+app.delete('/v2/predmet', function (req, res) {});
+
+app.delete('/v2/student', function (req, res) {});
+
+app.delete('/v2/tip', function (req, res) {});
 
 // server radi na sljedecem portu
 var server = app.listen(PORT);
