@@ -13,14 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // rute
-/*let predmeti = [{naziv:"WT"},
-                {naziv:"RMA"},
-                {naziv:"RG"},
-                {naziv:"DM"},
-                {naziv:"OOI"},
-                {naziv:"OIS"},
-                {naziv:"VVS"}];*/
-app.get('/predmeti', function (req, res) {
+app.get('/v1/predmeti', function (req, res) {
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
         if(err) throw err;
         let predmeti = [];
@@ -38,15 +31,7 @@ app.get('/predmeti', function (req, res) {
     });
 });
 
-/*let aktivnosti = [{naziv:"WT",tip:"predavanje",pocetak:9,kraj:12,dan:"Ponedjeljak"},
-                  {naziv:"WT",tip:"vježbe",pocetak:12,kraj:14,dan:"Ponedjeljak"},
-                  {naziv:"RMA",tip:"predavanje",pocetak:14,kraj:17,dan:"Ponedjeljak"},
-                  {naziv:"RMA",tip:"vježbe",pocetak:12,kraj:14,dan:"Utorak"},
-                  {naziv:"DM",tip:"tutorijal",pocetak:14,kraj:16,dan:"Utorak"},
-                  {naziv:"DM",tip:"predavanje",pocetak:16,kraj:18,dan:"Utorak"},
-                  {naziv:"OI",tip:"predavanje",pocetak:12,kraj: 15,dan:"Srijeda"}];*/
-
-app.get('/aktivnosti', function (req, res) {
+app.get('/v1/aktivnosti', function (req, res) {
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
         let aktivnosti = [];
@@ -69,7 +54,7 @@ app.get('/aktivnosti', function (req, res) {
     });
 });
 
-app.get('/predmet/:naziv/aktivnost/', function (req, res) {
+app.get('/v1/predmet/:naziv/aktivnost/', function (req, res) {
     let naziv = req.params.naziv;
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
         if(err) throw err;
@@ -93,7 +78,7 @@ app.get('/predmet/:naziv/aktivnost/', function (req, res) {
     });
 });
 
-app.post('/predmet', function (req, res) {
+app.post('/v1/predmet', function (req, res) {
     let tijelo = req.body;
     let predmet = tijelo["naziv"];
     //console.log('Got body:', tijelo);
@@ -128,7 +113,7 @@ function presjek(Apocetak, Akraj, Bpocetak, Bkraj) {
     return true;
 }
 
-app.post('/aktivnost', function (req, res) {
+app.post('/v1/aktivnost', function (req, res) {
     let tijelo = req.body;
     let naziv = tijelo["naziv"];
     let tip = tijelo["tip"];
@@ -185,7 +170,7 @@ const izbrisiLinije = (data, linije = []) => {
         .join('\n');
 }
 
-app.delete('/aktivnost/:naziv', function (req, res) {
+app.delete('/v1/aktivnost/:naziv', function (req, res) {
     let naziv = req.params.naziv;
     //console.log(req.params);
     fs.readFile('resursi/aktivnosti.txt', function(err, buffer) {
@@ -219,7 +204,7 @@ app.delete('/aktivnost/:naziv', function (req, res) {
     });
 });
 
-app.delete('/predmet/:naziv', function (req, res) {
+app.delete('/v1/predmet/:naziv', function (req, res) {
     let naziv = req.params.naziv;
     //console.log(req.params);
     fs.readFile('resursi/predmeti.txt', function(err, buffer) {
@@ -253,7 +238,7 @@ app.delete('/predmet/:naziv', function (req, res) {
     });
 });
 
-app.delete('/all', function (req, res) {
+app.delete('/v1/all', function (req, res) {
     fs.writeFile('resursi/predmeti.txt', "", 'utf8', function(err) {
         if (err) {
             res.json({message:"Greška - sadržaj datoteka nije moguće obrisati!"});

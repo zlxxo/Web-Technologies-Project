@@ -9,7 +9,7 @@ window.onload = () => {
             predmeti = this.responseText;
         }
     });
-    xhr.open("GET", "http://localhost:3000/predmeti");
+    xhr.open("GET", "http://localhost:3000/v1/predmeti");
     xhr.send();
 
     var xhr2 = new XMLHttpRequest();
@@ -19,7 +19,7 @@ window.onload = () => {
             aktivnosti = this.responseText;
         }
     });
-    xhr2.open("GET", "http://localhost:3000/aktivnosti");
+    xhr2.open("GET", "http://localhost:3000/v1/aktivnosti");
     xhr2.send();    
 }
 
@@ -67,7 +67,7 @@ function unesiRaspored() {
                     }
                 }
             });
-            xhr.open("POST", "http://localhost:3000/predmet");
+            xhr.open("POST", "http://localhost:3000/v1/predmet");
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(data);
         }
@@ -86,7 +86,7 @@ function unesiRaspored() {
                             console.log(this.responseText);
                           }
                         });
-                        xhr3.open("DELETE", "http://localhost:3000/predmet/" + naziv);
+                        xhr3.open("DELETE", "http://localhost:3000/v1/predmet/" + naziv);
                         xhr3.send();
                         alert("Greška! Neuspješno upisivanje aktivnosti!");
                     } else {
@@ -94,7 +94,7 @@ function unesiRaspored() {
                     }
                 }
             });
-            xhr2.open("POST", "http://localhost:3000/aktivnost");
+            xhr2.open("POST", "http://localhost:3000/v1/aktivnost");
             xhr2.setRequestHeader("Content-Type", "application/json");
             xhr2.send(data2);
         }
