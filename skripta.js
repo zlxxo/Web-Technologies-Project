@@ -298,29 +298,85 @@ app.get('/v2/tip', function (req, res) {
     });
 });
 
-app.post('/v2/aktivnost', function (req, res) {});
+app.post('/v2/aktivnost', function (req, res) {
 
-app.post('/v2/dan', function (req, res) {});
+});
 
-app.post('/v2/grupa', function (req, res) {});
+app.post('/v2/dan/:id', function (req, res) {});
 
-app.post('/v2/predmet', function (req, res) {});
+app.post('/v2/grupa/:id', function (req, res) {});
 
-app.post('/v2/student', function (req, res) {});
+app.post('/v2/predmet/:id', function (req, res) {});
 
-app.post('/v2/tip', function (req, res) {});
+app.post('/v2/student/:id', function (req, res) {});
 
-app.delete('/v2/aktivnost', function (req, res) {});
+app.post('/v2/tip/:id', function (req, res) {});
 
-app.delete('/v2/dan', function (req, res) {});
+app.delete('/v2/aktivnost/:id', function (req, res) {
+    const aktivnost = req.params.id;
+    baza.Aktivnost.destroy({
+        where: {
+            id: aktivnost
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih aktivnosti je " + broj);
+    });
+});
 
-app.delete('/v2/grupa', function (req, res) {});
+app.delete('/v2/dan/:id', function (req, res) {
+    const dan = req.params.id;
+    baza.Dan.destroy({
+        where: {
+            id: dan
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih dana je " + broj);
+    });
+});
 
-app.delete('/v2/predmet', function (req, res) {});
+app.delete('/v2/grupa/:id', function (req, res) {
+    const grupa = req.params.id;
+    baza.Grupa.destroy({
+        where: {
+            id: grupa
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih grupa je " + broj);
+    });
+});
 
-app.delete('/v2/student', function (req, res) {});
+app.delete('/v2/predmet/:id', function (req, res) {
+    const predmet = req.params.id;
+    baza.Predmet.destroy({
+        where: {
+            id: predmet
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih predmeta je " + broj);
+    });
+});
 
-app.delete('/v2/tip', function (req, res) {});
+app.delete('/v2/student/:id', function (req, res) {
+    const student = req.params.id;
+    baza.Student.destroy({
+        where: {
+            id: student
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih studenata je " + broj);
+    });
+});
+
+app.delete('/v2/tip/:id', function (req, res) {
+    const tip = req.params.id;
+    baza.Tip.destroy({
+        where: {
+            id: tip
+        }
+    }).then((broj) => {
+        res.send("Broj obrisanih tipova je " + broj);
+    });
+});
 
 // server radi na sljedecem portu
 var server = app.listen(PORT);
