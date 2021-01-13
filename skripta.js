@@ -271,20 +271,28 @@ app.delete('/all', function (req, res) {
 
 // server radi na sljedecem portu
 var server = app.listen(PORT);
-module.exports = server
+module.exports = server;
 
 // veza sa bazom
 const sequelize = require('./baza.js');
 
 // provjera konekcije
-sequelize.authenticate()
-.then(() => {
+sequelize.authenticate().then(() => {
     console.log("Konekcija sa bazom uspješna!");
-})
-.catch((err) => {
+}).catch((err) => {
     console.log("Greška pri konektovanju s bazom!", err);
 });
 
-//
+// importovanje modela
 const Aktivnost = require('./modeli/aktivnost.js');
-Aktivnost.sync();
+Aktivnost.sync({force:true});
+const Dan = require('./modeli/dan.js');
+Dan.sync({force:true});
+const Grupa = require('./modeli/grupa.js');
+Grupa.sync({force:true});
+const Predmet = require('./modeli/predmet.js');
+Predmet.sync({force:true});
+const Student = require('./modeli/student.js');
+Student.sync({force:true});
+const Tip = require('./modeli/tip.js');
+Tip.sync({force:true});
