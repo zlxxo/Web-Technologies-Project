@@ -273,8 +273,10 @@ app.delete('/all', function (req, res) {
 var server = app.listen(PORT);
 module.exports = server
 
+// veza sa bazom
 const sequelize = require('./baza.js');
 
+// provjera konekcije
 sequelize.authenticate()
 .then(() => {
     console.log("Konekcija sa bazom uspješna!");
@@ -283,5 +285,6 @@ sequelize.authenticate()
     console.log("Greška pri konektovanju s bazom!", err);
 });
 
-const Aktivnost = sequelize.import(__dirname + "/modeli/aktivnost.js");
+//
+const Aktivnost = require('./modeli/aktivnost.js');
 Aktivnost.sync();
