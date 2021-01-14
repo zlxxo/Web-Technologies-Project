@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Planiranje nastavnik</title>
+        <link rel="stylesheet" type="text/css" href="css/planiranjeNastavnik.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="studenti.js"></script>
+    </head>
+    <body>
+        <div id="meni">
+            <a href="spirala2rasporedi.html">Raspored</a>
+            <a href="aktivnost.html">Aktivnosti</a>
+            <a href="planiranjeNastavnik.html">Planiranje nastavnik</a>
+            <a href="podaciStudent.html">Podaci student</a>
+        </div>
+        <div id="okvir">
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <label>Studenti:</label>
+                        </td>
+                        <td>
+                            <textarea id="studenti"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Grupa:</label>
+                        </td>
+                        <td>
+                            <select type="dr" id="grupa">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button onclick="unesiStudente()">Upiši</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>
