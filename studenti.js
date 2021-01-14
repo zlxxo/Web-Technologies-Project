@@ -23,8 +23,18 @@ window.onload = () => {
 function unesiStudente() {
     let tekst = document.getElementById("studenti").value;
     let studenti = tekst.split("\n");
+    let gr = document.getElementById("grupe");
+    let grupaId = gr.options[gr.selectedIndex].id;
     for(let i = 0; i < studenti.length; i++) {
         let linija = studenti[i];
-        alert(i + " " + linija);
+        let podaci = linija.split(",");
+        let ime = podaci[0];
+        let index = podaci[1];
+        const student = {
+            ime: ime,
+            index: index,
+            GrupaId: grupaId
+        };
+        alert(JSON.stringify(student));
     }
 }
