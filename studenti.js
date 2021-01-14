@@ -21,5 +21,10 @@ window.onload = () => {
 
 
 function unesiStudente() {
-    alert("Unos");
+    let tekst = document.getElementById("studenti").value;
+    let studenti = tekst.split("\n");
+    for(let i = 0; i < studenti.length; i++) {
+        let linija = studenti[i];
+        alert(i + " " + linija);
+    }
 }
