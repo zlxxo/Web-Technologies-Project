@@ -298,7 +298,41 @@ app.get('/v2/tip', function (req, res) {
     });
 });
 
-app.post('/v2/aktivnost:id', function (req, res) {});
+app.post('/v2/aktivnost/:id', function (req, res) {
+    const aktivnostId = req.params.id;
+    const naziv = req.body.naziv;
+    const pocetak = req.body.pocetak;
+    const kraj = req.body.kraj;
+    const tip = req.body.tipId;
+    const dan = req.body.danId;
+    const grupa = req.body.grupaId;
+    const predmet = req.body.predmetId;
+    baza.Aktivnost.findOne({
+        where: {
+            id: aktivnostId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const aktivnost = {
+                id: aktivnostId,
+                naziv: naziv,
+                kraj: kraj,
+                pocetak: pocetak,
+                TipId: tip,
+                DanId: dan,
+                PredmetId: predmet
+            };
+            if(grupa != null) {
+                aktivnost.GrupaId = grupa;
+            }
+            baza.Aktivnost.create(aktivnost).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            res.send("Aktivnost već upisana!");
+        }
+    });
+});
 
 app.post('/v2/dan/:id', function (req, res) {
     const danId = req.params.id;
@@ -368,11 +402,91 @@ app.post('/v2/predmet/:id', function (req, res) {
     });
 });
 
-app.post('/v2/student/:id', function (req, res) {});
+app.post('/v2/student/:id', function (req, res) {
+    const studentId = req.params.id;
+    const ime = req.body.ime;
+    const index = req.body.index;
+    baza.Student.findOne({
+        where: {
+            id: studentId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const student = {
+                id: studentId,
+                ime: ime,
+                index: index
+            };
+            baza.Student.create(student).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            res.send("Student već upisan!");
+        }
+    });
+});
 
-app.post('/v2/tip/:id', function (req, res) {});
+app.post('/v2/tip/:id', function (req, res) {
+    const tipId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Tip.findOne({
+        where: {
+            id: tipId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const tip = {
+                id: tipId,
+                naziv: naziv
+            };
+            baza.Tip.create(tip).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            res.send("Tip već upisan!");
+        }
+    });
+});
 
-app.put('/v2/aktivnost:id', function (req, res) {});
+app.put('/v2/aktivnost/:id', function (req, res) {
+    const aktivnostId = req.params.id;
+    const naziv = req.body.naziv;
+    const pocetak = req.body.pocetak;
+    const kraj = req.body.kraj;
+    const tip = req.body.tipId;
+    const dan = req.body.danId;
+    const grupa = req.body.grupaId;
+    const predmet = req.body.predmetId;
+    baza.Aktivnost.findOne({
+        where: {
+            id: aktivnostId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Aktivnost nije upisana!");
+        } else {
+            const aktivnost = {
+                id: aktivnostId,
+                naziv: naziv,
+                kraj: kraj,
+                pocetak: pocetak,
+                TipId: tip,
+                DanId: dan,
+                PredmetId: predmet
+            };
+            if(grupa != null) {
+                aktivnost.GrupaId = grupa;
+            }
+            baza.Aktivnost.update(aktivnost, {
+                where: {
+                    id: aktivnostId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
+});
 
 app.put('/v2/dan/:id', function (req, res) {
     const danId = req.params.id;
@@ -451,9 +565,57 @@ app.put('/v2/predmet/:id', function (req, res) {
     });
 });
 
-app.put('/v2/student/:id', function (req, res) {});
+app.put('/v2/student/:id', function (req, res) {
+    const studentId = req.params.id;
+    const ime = req.body.ime;
+    const index = req.body.index;
+    baza.Student.findOne({
+        where: {
+            id: studentId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Student nije upisan!");
+        } else {
+            const student = {
+                ime: ime,
+                index: index
+            };
+            baza.Student.update(student, {
+                where: {
+                    id: studentId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
+});
 
-app.put('/v2/tip/:id', function (req, res) {});
+app.put('/v2/tip/:id', function (req, res) {
+    const tipId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Tip.findOne({
+        where: {
+            id: tipId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Tip nije upisan!");
+        } else {
+            const tip = {
+                naziv: naziv
+            };
+            baza.Tip.update(tip, {
+                where: {
+                    id: tipId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
+});
 
 app.delete('/v2/aktivnost/:id', function (req, res) {
     const aktivnost = req.params.id;
