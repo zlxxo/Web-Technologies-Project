@@ -258,8 +258,8 @@ app.delete('/v1/all', function (req, res) {
 const baza = require('./baza.js');
 
 // kreiranje baze
-baza.sequelize.sync({force: true});
-//baza.sequelize.sync();
+//baza.sequelize.sync({force: true});
+baza.sequelize.sync();
 
 // rute za CRUD
 app.get('/v2/aktivnost', function (req, res) {
@@ -325,6 +325,7 @@ app.post('/v2/dan/:id', function (req, res) {
 app.post('/v2/grupa/:id', function (req, res) {
     const grupaId = req.params.id;
     const naziv = req.body.naziv;
+    const predmetId = req.body.predmetId;
     baza.Grupa.findOne({
         where: {
             id: grupaId
@@ -333,7 +334,8 @@ app.post('/v2/grupa/:id', function (req, res) {
         if(rezultat == null) {
             const grupa = {
                 id: grupaId,
-                naziv: naziv
+                naziv: naziv,
+                PredmetId: predmetId
             };
             baza.Grupa.create(grupa).then((rez) => {
                 res.send(rez);
@@ -345,23 +347,23 @@ app.post('/v2/grupa/:id', function (req, res) {
 });
 
 app.post('/v2/predmet/:id', function (req, res) {
-    const grupaId = req.params.id;
+    const predmetId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Grupa.findOne({
+    baza.Predmet.findOne({
         where: {
-            id: grupaId
+            id: predmetId
         }
     }).then((rezultat) => {
         if(rezultat == null) {
-            const grupa = {
-                id: grupaId,
+            const predmet = {
+                id: predmetId,
                 naziv: naziv
             };
-            baza.Grupa.create(grupa).then((rez) => {
+            baza.Predmet.create(predmet).then((rez) => {
                 res.send(rez);
             });
         } else {
-            res.send("Grupa već upisana!");
+            res.send("Predmet već upisan!");
         }
     });
 });
@@ -400,7 +402,8 @@ app.put('/v2/dan/:id', function (req, res) {
 app.put('/v2/grupa/:id', function (req, res) {
     const grupaId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Dan.findOne({
+    const predmetId = req.body.predmetId;
+    baza.Grupa.findOne({
         where: {
             id: grupaId
         }
@@ -409,7 +412,8 @@ app.put('/v2/grupa/:id', function (req, res) {
             res.send("Grupa nije upisana!");
         } else {
             const grupa = {
-                naziv: naziv
+                naziv: naziv,
+                PredmetId: predmetId
             };
             baza.Grupa.update(grupa, {
                 where: {

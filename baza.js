@@ -22,8 +22,8 @@ baza.Tip = Tip;
 
 // relacije
 // Predmet 1 - N Grupa
-baza.GrupePoPredemetima = baza.Predmet.belongsTo(baza.Grupa);
-baza.Grupa.belongsToMany(baza.Predmet, {through: 'GrupePoPredemetima'});
+baza.Predmet.hasMany(baza.Grupa, {foreignKey: {allowNull: false}});
+baza.Grupa.belongsTo(baza.Predmet);
 
 // Aktivnost N - 1 Predmet
 baza.Aktivnost.belongsTo(baza.Predmet);
