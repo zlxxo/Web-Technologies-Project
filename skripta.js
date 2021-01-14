@@ -302,9 +302,7 @@ app.post('/v2/aktivnost:id', function (req, res) {});
 
 app.post('/v2/dan/:id', function (req, res) {
     const danId = req.params.id;
-    //console.log("id", danId);
     const naziv = req.body.naziv;
-    //console.log("body", req.body);
     baza.Dan.findOne({
         where: {
             id: danId
@@ -318,6 +316,32 @@ app.post('/v2/dan/:id', function (req, res) {
             baza.Dan.create(dan).then((rez) => {
                 res.send(rez);
             });
+        } else {
+            res.send("Predmet već upisan!");
+        }
+    });
+});
+
+app.post('/v2/grupa/:id', function (req, res) {});
+
+app.post('/v2/predmet/:id', function (req, res) {});
+
+app.post('/v2/student/:id', function (req, res) {});
+
+app.post('/v2/tip/:id', function (req, res) {});
+
+app.put('/v2/aktivnost:id', function (req, res) {});
+
+app.put('/v2/dan/:id', function (req, res) {
+    const danId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Dan.findOne({
+        where: {
+            id: danId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Predmet nije upisan!");
         } else {
             const dan = {
                 naziv: naziv
@@ -333,13 +357,13 @@ app.post('/v2/dan/:id', function (req, res) {
     });
 });
 
-app.post('/v2/grupa/:id', function (req, res) {});
+app.put('/v2/grupa/:id', function (req, res) {});
 
-app.post('/v2/predmet/:id', function (req, res) {});
+app.put('/v2/predmet/:id', function (req, res) {});
 
-app.post('/v2/student/:id', function (req, res) {});
+app.put('/v2/student/:id', function (req, res) {});
 
-app.post('/v2/tip/:id', function (req, res) {});
+app.put('/v2/tip/:id', function (req, res) {});
 
 app.delete('/v2/aktivnost/:id', function (req, res) {
     const aktivnost = req.params.id;
