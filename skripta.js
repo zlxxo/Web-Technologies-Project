@@ -258,8 +258,8 @@ app.delete('/v1/all', function (req, res) {
 const baza = require('./baza.js');
 
 // kreiranje baze
-//baza.sequelize.sync({force: true});
-baza.sequelize.sync();
+baza.sequelize.sync({force: true});
+//baza.sequelize.sync();
 
 // rute za CRUD
 app.get('/v2/aktivnost', function (req, res) {
@@ -322,9 +322,49 @@ app.post('/v2/dan/:id', function (req, res) {
     });
 });
 
-app.post('/v2/grupa/:id', function (req, res) {});
+app.post('/v2/grupa/:id', function (req, res) {
+    const grupaId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Grupa.findOne({
+        where: {
+            id: grupaId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const grupa = {
+                id: grupaId,
+                naziv: naziv
+            };
+            baza.Grupa.create(grupa).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            res.send("Grupa već upisana!");
+        }
+    });
+});
 
-app.post('/v2/predmet/:id', function (req, res) {});
+app.post('/v2/predmet/:id', function (req, res) {
+    const grupaId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Grupa.findOne({
+        where: {
+            id: grupaId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const grupa = {
+                id: grupaId,
+                naziv: naziv
+            };
+            baza.Grupa.create(grupa).then((rez) => {
+                res.send(rez);
+            });
+        } else {
+            res.send("Grupa već upisana!");
+        }
+    });
+});
 
 app.post('/v2/student/:id', function (req, res) {});
 
@@ -335,7 +375,7 @@ app.put('/v2/aktivnost:id', function (req, res) {});
 app.put('/v2/dan/:id', function (req, res) {
     const danId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Dan.findOne({
+    baza.Grupa.findOne({
         where: {
             id: danId
         }
@@ -357,9 +397,55 @@ app.put('/v2/dan/:id', function (req, res) {
     });
 });
 
-app.put('/v2/grupa/:id', function (req, res) {});
+app.put('/v2/grupa/:id', function (req, res) {
+    const grupaId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Dan.findOne({
+        where: {
+            id: grupaId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Grupa nije upisana!");
+        } else {
+            const grupa = {
+                naziv: naziv
+            };
+            baza.Grupa.update(grupa, {
+                where: {
+                    id: grupaId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
+});
 
-app.put('/v2/predmet/:id', function (req, res) {});
+app.put('/v2/predmet/:id', function (req, res) {
+    const predmetId = req.params.id;
+    const naziv = req.body.naziv;
+    baza.Predmet.findOne({
+        where: {
+            id: predmetId
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            res.send("Predmet nije upisan!");
+        } else {
+            const predmet = {
+                naziv: naziv
+            };
+            baza.Predmet.update(predmet, {
+                where: {
+                    id: predmetId
+                }
+            }).then((rez) => {
+                res.send(rez);
+            });
+        }
+    });
+});
 
 app.put('/v2/student/:id', function (req, res) {});
 
