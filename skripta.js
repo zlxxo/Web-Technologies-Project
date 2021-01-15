@@ -457,33 +457,27 @@ app.put('/v2/aktivnost/:id', function (req, res) {
     const dan = req.body.danId;
     const grupa = req.body.grupaId;
     const predmet = req.body.predmetId;
-    baza.Aktivnost.findOne({
+    const aktivnost = {
+        id: aktivnostId,
+        naziv: naziv,
+        kraj: kraj,
+        pocetak: pocetak,
+        TipId: tip,
+        DanId: dan,
+        PredmetId: predmet
+    };
+    if(grupa != null) {
+        aktivnost.GrupaId = grupa;
+    }
+    baza.Aktivnost.update(aktivnost, {
         where: {
             id: aktivnostId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Aktivnost nije upisana!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeća aktivnost!");
         } else {
-            const aktivnost = {
-                id: aktivnostId,
-                naziv: naziv,
-                kraj: kraj,
-                pocetak: pocetak,
-                TipId: tip,
-                DanId: dan,
-                PredmetId: predmet
-            };
-            if(grupa != null) {
-                aktivnost.GrupaId = grupa;
-            }
-            baza.Aktivnost.update(aktivnost, {
-                where: {
-                    id: aktivnostId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažurirana aktivnost!");
         }
     });
 });
@@ -491,24 +485,18 @@ app.put('/v2/aktivnost/:id', function (req, res) {
 app.put('/v2/dan/:id', function (req, res) {
     const danId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Grupa.findOne({
+    const dan = {
+        naziv: naziv
+    };
+    baza.Dan.update(dan, {
         where: {
             id: danId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Predmet nije upisan!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeći dan!");
         } else {
-            const dan = {
-                naziv: naziv
-            };
-            baza.Dan.update(dan, {
-                where: {
-                    id: danId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažuriran dan!")
         }
     });
 });
@@ -517,25 +505,19 @@ app.put('/v2/grupa/:id', function (req, res) {
     const grupaId = req.params.id;
     const naziv = req.body.naziv;
     const predmetId = req.body.predmetId;
-    baza.Grupa.findOne({
+    const grupa = {
+        naziv: naziv,
+        PredmetId: predmetId
+    };
+    baza.Grupa.update(grupa, {
         where: {
             id: grupaId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Grupa nije upisana!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeća grupa!");
         } else {
-            const grupa = {
-                naziv: naziv,
-                PredmetId: predmetId
-            };
-            baza.Grupa.update(grupa, {
-                where: {
-                    id: grupaId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažurirana grupa!");
         }
     });
 });
@@ -543,24 +525,18 @@ app.put('/v2/grupa/:id', function (req, res) {
 app.put('/v2/predmet/:id', function (req, res) {
     const predmetId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Predmet.findOne({
+    const predmet = {
+        naziv: naziv
+    };
+    baza.Predmet.update(predmet, {
         where: {
             id: predmetId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Predmet nije upisan!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeći predmet!");
         } else {
-            const predmet = {
-                naziv: naziv
-            };
-            baza.Predmet.update(predmet, {
-                where: {
-                    id: predmetId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažuriran predmet!");
         }
     });
 });
@@ -569,25 +545,19 @@ app.put('/v2/student/:id', function (req, res) {
     const studentId = req.params.id;
     const ime = req.body.ime;
     const index = req.body.index;
-    baza.Student.findOne({
+    const student = {
+        ime: ime,
+        index: index
+    };
+    baza.Student.update(student, {
         where: {
             id: studentId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Student nije upisan!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeći student!");
         } else {
-            const student = {
-                ime: ime,
-                index: index
-            };
-            baza.Student.update(student, {
-                where: {
-                    id: studentId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažuriran student!");
         }
     });
 });
@@ -595,24 +565,18 @@ app.put('/v2/student/:id', function (req, res) {
 app.put('/v2/tip/:id', function (req, res) {
     const tipId = req.params.id;
     const naziv = req.body.naziv;
-    baza.Tip.findOne({
+    const tip = {
+        naziv: naziv
+    };
+    baza.Tip.update(tip, {
         where: {
             id: tipId
         }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            res.send("Tip nije upisan!");
+    }).then((rez) => {
+        if(rez == 0) {
+            res.send("Nepostojeći tip!");
         } else {
-            const tip = {
-                naziv: naziv
-            };
-            baza.Tip.update(tip, {
-                where: {
-                    id: tipId
-                }
-            }).then((rez) => {
-                res.send(rez);
-            });
+            res.send("Uspješno ažuriran tip!");
         }
     });
 });
