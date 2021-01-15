@@ -50,6 +50,8 @@ function unesiStudente() {
     let grupaId = gr.options[gr.selectedIndex].id;
     let grupa = pronadjiGrupu(grupaId);
 
+    var poruke = [];
+
     for(let i = 0; i < studenti1.length; i++) {
         
         let linija = studenti1[i];
@@ -57,41 +59,27 @@ function unesiStudente() {
         let ime = podaci[0];
         let index = podaci[1];
         const student = {
+            id: studenti.length + 1,
             ime: ime,
             index: index,
         };
 
-        let postoji = pronadjiStudenta(index);
-        if(postoji == null) {
-            let noviId = studenti.length + 1;
-
-            var data = JSON.stringify(student);
-            var xhr4 = new XMLHttpRequest();
-            xhr4.withCredentials = true;
-            xhr4.addEventListener("readystatechange", function() {
-                if(this.readyState === 4) {
-                    alert(this.responseText);
-                }
-            });
-            xhr4.open("POST", "http://localhost:3000/v2/student/" + noviId);
-            xhr4.setRequestHeader("Content-Type", "application/json");
-            xhr4.send(data);
-        } else {
-            let id = postoji.id;
-
-            var data = JSON.stringify(student);
-            var xhr5 = new XMLHttpRequest();
-            xhr5.withCredentials = true;
-            xhr5.addEventListener("readystatechange", function() {
-                if(this.readyState === 4) {
-                    alert(this.responseText);
-                }
-            });
-            xhr5.open("PUT", "http://localhost:3000/v2/student/" + id);
-            xhr5.setRequestHeader("Content-Type", "application/json");
-            xhr5.send(data);
-        }
+        var data = JSON.stringify(student);
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.addEventListener("readystatechange", function() {
+            if(this.readyState === 4) {
+                let odgovor = JSON.parse(this.responseText);
+                poruke.push({poruka: odgovor.poruka});
+                alert(odgovor.poruka);
+            }
+        });
+        xhr.open("POST", "http://localhost:3000/v2/student");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(data);
     }
+
+    alert(JSON.stringify(poruke));
 }
 
 function pronadjiStudenta(index) {
