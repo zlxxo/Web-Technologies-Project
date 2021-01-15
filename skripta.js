@@ -421,7 +421,49 @@ app.post('/v2/student/:id', function (req, res) {
                 res.send(rez);
             });
         } else {
-            res.send("Student već upisan!");
+            res.send(rezultat);
+            //res.send("Student već upisan!");
+        }
+    });
+});
+
+app.post('/v2/student/', function (req, res) {
+    const studentId = req.body.id;
+    const ime = req.body.ime;
+    const index = req.body.index;
+    baza.Student.findOne({
+        where: {
+            index: index
+        }
+    }).then((rezultat) => {
+        if(rezultat == null) {
+            const student = {
+                id: studentId,
+                ime: ime,
+                index: index
+            };
+            baza.Student.create(student).then((rez) => {
+                let odgovor = {
+                    poruka: "Kreiran student novi student!",
+                    student: rez
+                }
+                res.json(odgovor);
+            });
+        } else {
+            if(rezultat.ime == ime) {
+                let odgovor = {
+                    poruka: "Student je već upisan!",
+                    student: rezultat
+                }
+                res.json(odgovor);
+            } else {
+                let odgovor = {
+                    poruka: "Student " + ime + " nije kreiran jer postoji student " +
+                        rezultat.ime + " sa istim indexom " + index + "!",
+                    student: rezultat
+                }
+                res.json(odgovor);
+            }
         }
     });
 });

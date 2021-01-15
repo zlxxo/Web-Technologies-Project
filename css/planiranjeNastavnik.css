@@ -4,6 +4,10 @@ body {
     padding: 0%;
 }
 
+textarea {
+    height: 7em;
+}
+
 #okvir {
     width: fit-content;
     margin: 4em auto;
