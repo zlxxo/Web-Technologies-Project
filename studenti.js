@@ -1,5 +1,4 @@
 let grupe = [];
-let studenti = [];
 let predmeti = [];
 
 window.onload = () => {
@@ -20,16 +19,6 @@ window.onload = () => {
     xhr.open("GET", "http://localhost:3000/v2/grupa");
     xhr.send();
 
-    var xhr2 = new XMLHttpRequest();
-    xhr2.withCredentials = true;
-    xhr2.addEventListener("readystatechange", function() {
-        if(this.readyState === 4) {
-            studenti = JSON.parse(this.responseText);
-        }
-    });
-    xhr2.open("GET", "http://localhost:3000/v2/student");
-    xhr2.send();
-
     var xhr3 = new XMLHttpRequest();
     xhr3.withCredentials = true;
     xhr3.addEventListener("readystatechange", function() {
@@ -41,25 +30,26 @@ window.onload = () => {
     xhr3.send();
 }
 
+let prouke = [];
 
 function unesiStudente() {
     let tekst = document.getElementById("studenti").value;
-    let studenti1 = tekst.split("\n");
+    let studenti = tekst.split("\n");
 
     let gr = document.getElementById("grupe");
     let grupaId = gr.options[gr.selectedIndex].id;
     let grupa = pronadjiGrupu(grupaId);
 
-    var poruke = [];
+    poruke = [];
+    tekst.value = "";
 
-    for(let i = 0; i < studenti1.length; i++) {
+    for(let i = 0; i < studenti.length; i++) {
         
-        let linija = studenti1[i];
+        let linija = studenti[i];
         let podaci = linija.split(",");
         let ime = podaci[0];
         let index = podaci[1];
         const student = {
-            id: studenti.length + 1,
             ime: ime,
             index: index,
         };
@@ -70,8 +60,11 @@ function unesiStudente() {
         xhr.addEventListener("readystatechange", function() {
             if(this.readyState === 4) {
                 let odgovor = JSON.parse(this.responseText);
-                poruke.push({poruka: odgovor.poruka});
-                alert(odgovor.poruka);
+                if(odgovor.poruka != "Student je već upisan!" &&
+                    odgovor.poruka != "Kreiran student novi student!") {
+                    poruke.push(odgovor.poruka);
+                    tekst.value += odgovor.poruka;
+                }
             }
         });
         xhr.open("POST", "http://localhost:3000/v2/student");
@@ -79,16 +72,7 @@ function unesiStudente() {
         xhr.send(data);
     }
 
-    alert(JSON.stringify(poruke));
-}
-
-function pronadjiStudenta(index) {
-    for(let i = 0; i < studenti.length; i++) {
-        if(studenti[i].index == index) {
-            return studenti[i];
-        }
-    }
-    return null;
+    alert("");
 }
 
 function pronadjiGrupu(id) {

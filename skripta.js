@@ -428,7 +428,6 @@ app.post('/v2/student/:id', function (req, res) {
 });
 
 app.post('/v2/student/', function (req, res) {
-    const studentId = req.body.id;
     const ime = req.body.ime;
     const index = req.body.index;
     baza.Student.findOne({
@@ -438,7 +437,6 @@ app.post('/v2/student/', function (req, res) {
     }).then((rezultat) => {
         if(rezultat == null) {
             const student = {
-                id: studentId,
                 ime: ime,
                 index: index
             };
