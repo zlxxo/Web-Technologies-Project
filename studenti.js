@@ -45,9 +45,14 @@ window.onload = () => {
 function unesiStudente() {
     let tekst = document.getElementById("studenti").value;
     let studenti1 = tekst.split("\n");
+
     let gr = document.getElementById("grupe");
     let grupaId = gr.options[gr.selectedIndex].id;
+    let grupa = pronadjiGrupu(grupaId);
+    alert(JSON.stringify(grupa));
+
     for(let i = 0; i < studenti1.length; i++) {
+        
         let linija = studenti1[i];
         let podaci = linija.split(",");
         let ime = podaci[0];
@@ -57,9 +62,39 @@ function unesiStudente() {
             index: index,
             GrupaId: grupaId
         };
-    }
 
-    alert(JSON.stringify(grupe));
-    alert(JSON.stringify(studenti));
-    alert(JSON.stringify(predmeti));
+        let postoji = pronadjiStudenta(index);
+        if(postoji == null) {
+            alert("ne postoji");
+        } else {
+            alert(JSON.stringify(postoji));
+        }
+    }
+}
+
+function pronadjiStudenta(index) {
+    for(let i = 0; i < studenti.length; i++) {
+        if(studenti[i].index == index) {
+            return studenti[i];
+        }
+    }
+    return null;
+}
+
+function pronadjiGrupu(id) {
+    for(let i = 0; i < grupe.length; i++) {
+        if(grupe[i].id == id) {
+            return grupe[i];
+        }
+    }
+    return null;
+}
+
+function pronadjiPredmet(id) {
+    for(let i = 0; i < predmeti.length; i++) {
+        if(predmeti[i].id == id) {
+            return predmeti[i];
+        }
+    }
+    return null;
 }
