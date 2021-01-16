@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const predmet = require('./modeli/predmet');
 const { setMaxListeners } = require('./skripta');
 const sequelize = new Sequelize('mysql://root:root@localhost:3306/wt2018232');
 
@@ -22,7 +23,7 @@ baza.Tip = Tip;
 
 // relacije
 // Predmet 1 - N Grupa
-baza.Predmet.hasMany(baza.Grupa, {as: "predmeti", foreignKey: {allowNull: false}});
+baza.Predmet.hasMany(baza.Grupa, {as: "predmeti"});
 
 // Aktivnost N - 1 Predmet
 baza.Predmet.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
