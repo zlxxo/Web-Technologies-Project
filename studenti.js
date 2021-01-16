@@ -67,10 +67,14 @@ function unesiStudente() {
         xhr.addEventListener("readystatechange", function() {
             if(this.readyState === 4) {
                 let odgovor = JSON.parse(this.responseText);
-                if(odgovor.poruka != "Student je već upisan!" &&
-                    odgovor.poruka != "Kreiran student novi student!") {
-                    poruke.push(odgovor.poruka);
-                    tekst.value += odgovor.poruka;
+                if(odgovor.poruka == "Student je već upisan!") {
+                } else {
+                    if(odgovor.poruka != "Kreiran student novi student!") {
+                        poruke.push(odgovor.poruka);
+                        tekst.value += odgovor.poruka;
+                    } else {
+
+                    }
                 }
             }
         });

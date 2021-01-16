@@ -298,8 +298,7 @@ app.get('/v2/tip', function (req, res) {
     });
 });
 
-app.post('/v2/aktivnost/:id', function (req, res) {
-    const aktivnostId = req.params.id;
+app.post('/v2/aktivnost', function (req, res) {
     const naziv = req.body.naziv;
     const pocetak = req.body.pocetak;
     const kraj = req.body.kraj;
@@ -309,12 +308,16 @@ app.post('/v2/aktivnost/:id', function (req, res) {
     const predmet = req.body.predmetId;
     baza.Aktivnost.findOne({
         where: {
-            id: aktivnostId
+            naziv: naziv,
+            kraj: kraj,
+            pocetak: pocetak,
+            TipId: tip,
+            DanId: dan,
+            PredmetId: predmet
         }
     }).then((rezultat) => {
         if(rezultat == null) {
             const aktivnost = {
-                id: aktivnostId,
                 naziv: naziv,
                 kraj: kraj,
                 pocetak: pocetak,
@@ -334,40 +337,37 @@ app.post('/v2/aktivnost/:id', function (req, res) {
     });
 });
 
-app.post('/v2/dan/:id', function (req, res) {
-    const danId = req.params.id;
+app.post('/v2/dan', function (req, res) {
     const naziv = req.body.naziv;
     baza.Dan.findOne({
         where: {
-            id: danId
+            naziv: naziv
         }
     }).then((rezultat) => {
         if(rezultat == null) {
             const dan = {
-                id: danId,
                 naziv: naziv
             };
             baza.Dan.create(dan).then((rez) => {
                 res.send(rez);
             });
         } else {
-            res.send("Predmet već upisan!");
+            res.send("Dan već upisan!");
         }
     });
 });
 
-app.post('/v2/grupa/:id', function (req, res) {
-    const grupaId = req.params.id;
+app.post('/v2/grupa', function (req, res) {
     const naziv = req.body.naziv;
     const predmetId = req.body.predmetId;
     baza.Grupa.findOne({
         where: {
-            id: grupaId
+            naziv: naziv,
+            PredmetId: predmetId
         }
     }).then((rezultat) => {
         if(rezultat == null) {
             const grupa = {
-                id: grupaId,
                 naziv: naziv,
                 PredmetId: predmetId
             };
@@ -380,17 +380,15 @@ app.post('/v2/grupa/:id', function (req, res) {
     });
 });
 
-app.post('/v2/predmet/:id', function (req, res) {
-    const predmetId = req.params.id;
+app.post('/v2/predmet', function (req, res) {
     const naziv = req.body.naziv;
     baza.Predmet.findOne({
         where: {
-            id: predmetId
+            naziv: naziv
         }
     }).then((rezultat) => {
         if(rezultat == null) {
             const predmet = {
-                id: predmetId,
                 naziv: naziv
             };
             baza.Predmet.create(predmet).then((rez) => {
@@ -398,31 +396,6 @@ app.post('/v2/predmet/:id', function (req, res) {
             });
         } else {
             res.send("Predmet već upisan!");
-        }
-    });
-});
-
-app.post('/v2/student/:id', function (req, res) {
-    const studentId = req.params.id;
-    const ime = req.body.ime;
-    const index = req.body.index;
-    baza.Student.findOne({
-        where: {
-            id: studentId
-        }
-    }).then((rezultat) => {
-        if(rezultat == null) {
-            const student = {
-                id: studentId,
-                ime: ime,
-                index: index
-            };
-            baza.Student.create(student).then((rez) => {
-                res.send(rez);
-            });
-        } else {
-            res.send(rezultat);
-            //res.send("Student već upisan!");
         }
     });
 });
@@ -470,17 +443,15 @@ app.post('/v2/student', function (req, res) {
     });
 });
 
-app.post('/v2/tip/:id', function (req, res) {
-    const tipId = req.params.id;
+app.post('/v2/tip', function (req, res) {
     const naziv = req.body.naziv;
     baza.Tip.findOne({
         where: {
-            id: tipId
+            naziv: naziv
         }
     }).then((rezultat) => {
         if(rezultat == null) {
             const tip = {
-                id: tipId,
                 naziv: naziv
             };
             baza.Tip.create(tip).then((rez) => {
