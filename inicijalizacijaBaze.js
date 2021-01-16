@@ -28,6 +28,7 @@ function punjenjeBaze() {
         dani.push(cetvrtak);
         const petak = baza.Dan.create({naziv: "Petak"});
         dani.push(petak);
+        Promise.all(dani).then((p) => {}).catch((p) => {});
     
         const predavanje = baza.Tip.create({naziv: "Predavanje"});
         tipovi.push(predavanje);
@@ -35,6 +36,7 @@ function punjenjeBaze() {
         tipovi.push(vjezbe);
         const tutorijal = baza.Tip.create({naziv: "Tutorijal"});
         tipovi.push(tutorijal);
+        Promise.all(tipovi).then((p) => {}).catch((p) => {});
     
         const wt = baza.Predmet.create({naziv: "WT"});
         predmeti.push(wt);
@@ -42,27 +44,6 @@ function punjenjeBaze() {
         predmeti.push(rma);
         const rpr = baza.Predmet.create({naziv: "RPR"});
         predmeti.push(rpr);
-
-        const neko = baza.Student.create({
-            ime: "Neko Nekic",
-            index: 11111
-        });
-        studenti.push(neko);
-        const huso = baza.Student.create({
-            ime: "Huso Husic",
-            index: 11112
-        });
-        studenti.push(huso);
-        const maja = baza.Student.create({
-            ime: "Maja Majic",
-            index: 11113
-        });
-        studenti.push(maja);
-        const hana = baza.Student.create({
-            ime: "Hana Hanic",
-            index: 11115
-        });
-        studenti.push(hana);
     
         Promise.all(predmeti).then((pr) => {
             //console.log(pr);
@@ -103,6 +84,78 @@ function punjenjeBaze() {
                 });
             });
             grupe.push(grupa3);
+
+            const grupa4 = baza.Grupa.create({
+                naziv: "Grupa 2 - RMA",
+                PredmetId: predmet2.id
+            }).then((p) => {
+                p.setGrupePredmeta([predmet2]).then(() => {
+                    return new Promise(function(resolve,reject){resolve(p);});
+                });
+            });
+            grupe.push(grupa4);
+        });
+
+        Promise.all(grupe).then((gr) =>{
+            
+            var gr1 = gr.filter((p) => {
+                return p.naziv == "Grupa 1 - WT";
+            })[0];
+
+            var gr2 = gr.filter((p) => {
+                return p.naziv == "Grupa 2 - WT";
+            })[0];
+
+            var gr3 = gr.filter((p) => {
+                return p.naziv == "Grupa 1 - RMA";
+            })[0];
+
+            var gr4 = gr.filter((p) => {
+                return p.naziv == "Grupa 2 - RMA";
+            })[0];
+
+            const neko = baza.Student.create({
+                ime: "Neko Nekic",
+                index: 11111
+            }).then((p) => {
+                p.setGrupe([gr1, gr3]).then(() => {
+                    return new Promise(function(resolve,reject){resolve(p);});
+                });
+            });
+            studenti.push(neko);
+            
+
+            const huso = baza.Student.create({
+                ime: "Huso Husic",
+                index: 11112
+            }).then((p) => {
+                p.setGrupe([gr2, gr3]).then(() => {
+                    return new Promise(function(resolve,reject){resolve(p);});
+                });
+            });
+            studenti.push(huso);
+
+            const maja = baza.Student.create({
+                ime: "Maja Majic",
+                index: 11113
+            }).then((p) => {
+                p.setGrupe([gr2, gr4]).then(() => {
+                    return new Promise(function(resolve,reject){resolve(p);});
+                });
+            });
+            studenti.push(maja);
+
+            const hana = baza.Student.create({
+                ime: "Hana Hanic",
+                index: 11114
+            }).then((p) => {
+                p.setGrupe([gr1, gr4]).then(() => {
+                    return new Promise(function(resolve,reject){resolve(p);});
+                });
+            });
+            studenti.push(hana);
+
+            Promise.all(studenti).then((p) => {}).catch((p) => {});
         });
     });
 }

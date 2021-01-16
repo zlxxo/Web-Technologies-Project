@@ -38,7 +38,7 @@ baza.Dan.hasMany(baza.Aktivnost, {as: "aktivnostiDana"});
 baza.Tip.hasMany(baza.Aktivnost, {as: "tipoviAktivnosti"});
 
 // Student N - M Grupa
-baza.StudentskeGrupe = baza.Student.belongsToMany(baza.Grupa, {as: "grupe", through:'StudentskeGrupe'});
-baza.Grupa.belongsToMany(baza.Student, {as: "studenti", through:'StudentskeGrupe'});
+baza.StudentskeGrupe = baza.Student.belongsToMany(baza.Grupa, {as: "grupe", through:'StudentskeGrupe', foreignKey: "studentId"});
+baza.Grupa.belongsToMany(baza.Student, {as: "studenti", through:'StudentskeGrupe', foreignKey: "grupaId"});
 
 module.exports = baza;
