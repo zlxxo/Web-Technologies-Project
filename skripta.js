@@ -427,9 +427,13 @@ app.post('/v2/student/:id', function (req, res) {
     });
 });
 
-app.post('/v2/student/', function (req, res) {
+app.post('/v2/student', function (req, res) {
     const ime = req.body.ime;
     const index = req.body.index;
+    const grupaId = req.body.grupaId;
+    console.log(grupaId);
+    const grupe = req.body.grupe;
+    console.log(grupe);
     baza.Student.findOne({
         where: {
             index: index

@@ -39,6 +39,10 @@ function unesiStudente() {
     let gr = document.getElementById("grupe");
     let grupaId = gr.options[gr.selectedIndex].id;
     let grupa = pronadjiGrupu(grupaId);
+    //alert(JSON.stringify(grupa));
+
+    let grupePredmeta = grupeZaPredmet(grupa.PredmetId);
+    //alert(JSON.stringify(grupePredmeta));
 
     poruke = [];
     tekst.value = "";
@@ -46,12 +50,15 @@ function unesiStudente() {
     for(let i = 0; i < studenti.length; i++) {
         
         let linija = studenti[i];
+        if(linija == "") continue;
         let podaci = linija.split(",");
         let ime = podaci[0];
         let index = podaci[1];
         const student = {
             ime: ime,
             index: index,
+            grupaId: grupaId,
+            grupe: grupePredmeta
         };
 
         var data = JSON.stringify(student);
@@ -71,8 +78,6 @@ function unesiStudente() {
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(data);
     }
-
-    alert("");
 }
 
 function pronadjiGrupu(id) {
@@ -91,4 +96,14 @@ function pronadjiPredmet(id) {
         }
     }
     return null;
+}
+
+function grupeZaPredmet(id) {
+    let gr = [];
+    for(let i = 0; i < grupe.length; i++) {
+        if(grupe[i].PredmetId == id) {
+            gr.push(grupe[i]);
+        }
+    }
+    return gr;
 }
