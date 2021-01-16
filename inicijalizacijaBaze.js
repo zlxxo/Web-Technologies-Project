@@ -27,7 +27,19 @@ function punjenjeBaze() {
     predmeti.push(rpr);
 
     /*Promise.all(predmeti).then((pr) => {
-        const grupa1 = baza.Grupa.create({naziv: "Grupa 1 - WT"}).then();
+        //console.log(pr);
+        var predmet = pr.filter((p) => {
+            return p.naziv == "WT";
+        });
+        //console.log(predmet);
+
+        const grupa1 = baza.Grupa.create({
+            naziv: "Grupa 1 - WT",
+            PredmetId: predmet.id
+        }).then((p) => {
+            p.setPredmeti([predmet]);
+            return new Promise(function(resolve,reject){resolve(p);});
+        });
     });*/
 }
 

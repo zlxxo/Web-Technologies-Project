@@ -22,23 +22,18 @@ baza.Tip = Tip;
 
 // relacije
 // Predmet 1 - N Grupa
-baza.Predmet.hasMany(baza.Grupa, {foreignKey: {allowNull: false}});
-baza.Grupa.belongsTo(baza.Predmet);
+baza.Predmet.hasMany(baza.Grupa, {as: "predmeti", foreignKey: {allowNull: false}});
 
 // Aktivnost N - 1 Predmet
-baza.Aktivnost.belongsTo(baza.Predmet);
 baza.Predmet.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
 
 // Aktivnost N - 0 Grupa
-baza.Aktivnost.belongsTo(baza.Grupa);
 baza.Grupa.hasMany(baza.Aktivnost, {foreignKey: {allowNull: true}});
 
 // Aktivnost N - 1 Dan
-baza.Aktivnost.belongsTo(baza.Dan);
 baza.Dan.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
 
 // Aktivnost N - 1 Tip
-baza.Aktivnost.belongsTo(baza.Tip);
 baza.Tip.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
 
 // Student N - M Grupa
