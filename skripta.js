@@ -256,10 +256,9 @@ app.delete('/v1/all', function (req, res) {
 
 // veza sa bazom
 const baza = require('./baza.js');
+const inicijalizacijaBaze = require('./inicijalizacijaBaze.js');
 
-// kreiranje baze
-//baza.sequelize.sync({force: true});
-baza.sequelize.sync();
+inicijalizacijaBaze.inicijalizacija();
 
 // rute za CRUD
 app.get('/v2/aktivnost', function (req, res) {
