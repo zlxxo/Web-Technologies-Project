@@ -41,7 +41,7 @@ function unesiStudente() {
     let grupa = pronadjiGrupu(grupaId);
     //alert(JSON.stringify(grupa));
 
-    let grupePredmeta = grupeZaPredmet(grupa.PredmetId);
+    let grupePredmeta = grupeZaPredmet(grupa.PredmetId, grupaId);
     //alert(JSON.stringify(grupePredmeta));
 
     poruke = [];
@@ -57,7 +57,7 @@ function unesiStudente() {
         const student = {
             ime: ime,
             index: index,
-            grupaId: grupaId,
+            grupa: grupa,
             grupe: grupePredmeta
         };
 
@@ -98,10 +98,10 @@ function pronadjiPredmet(id) {
     return null;
 }
 
-function grupeZaPredmet(id) {
+function grupeZaPredmet(predmetId, grupaId) {
     let gr = [];
     for(let i = 0; i < grupe.length; i++) {
-        if(grupe[i].PredmetId == id) {
+        if(grupe[i].PredmetId == predmetId && grupe[i].id != grupaId) {
             gr.push(grupe[i]);
         }
     }

@@ -430,10 +430,10 @@ app.post('/v2/student/:id', function (req, res) {
 app.post('/v2/student', function (req, res) {
     const ime = req.body.ime;
     const index = req.body.index;
-    const grupaId = req.body.grupaId;
-    console.log(grupaId);
+    const grupa = req.body.grupa;
+    //console.log(grupaId);
     const grupe = req.body.grupe;
-    console.log(grupe);
+    //console.log(grupe);
     baza.Student.findOne({
         where: {
             index: index
@@ -442,14 +442,14 @@ app.post('/v2/student', function (req, res) {
         if(rezultat == null) {
             const student = {
                 ime: ime,
-                index: index
+                index: index,
             };
             baza.Student.create(student).then((rez) => {
                 let odgovor = {
                     poruka: "Kreiran student novi student!",
                     student: rez
                 }
-                res.json(odgovor);
+                res.send(odgovor);
             });
         } else {
             if(rezultat.ime == ime) {
