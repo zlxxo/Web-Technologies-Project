@@ -306,6 +306,7 @@ app.post('/v2/aktivnost', function (req, res) {
     const dan = req.body.danId;
     const grupa = req.body.grupaId;
     const predmet = req.body.predmetId;
+    //console.log(req.body);
     baza.Aktivnost.findOne({
         where: {
             naziv: naziv,

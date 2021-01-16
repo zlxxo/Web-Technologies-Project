@@ -2,6 +2,7 @@ let predmeti = [];
 let aktivnosti = [];
 let dani = [];
 let tipovi = [];
+let grupe = [];
 
 window.onload = () => {
     var xhr = new XMLHttpRequest();
@@ -61,11 +62,30 @@ window.onload = () => {
     });
     xhr4.open("GET", "http://localhost:3000/v2/dan");
     xhr4.send();
+
+    var xhr5 = new XMLHttpRequest();
+    xhr5.withCredentials = true;
+    xhr5.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            grupe = JSON.parse(this.responseText);
+            //alert(JSON.stringify(dani));
+            let gr = document.getElementById("grupa");
+            let opcije = "";
+            for(let i = 0; i < grupe.length; i++) {
+                let grupa = grupe[i];
+                opcije += "<option id='" + grupa.id + "'>" + grupa.naziv + "</option>";
+            }
+            gr.innerHTML += opcije;
+        }
+    });
+    xhr5.open("GET", "http://localhost:3000/v2/grupa");
+    xhr5.send();
 }
 
 
 function unesiRaspored() {
-    let naziv = document.getElementById('naziv-predmeta').value;
+    let naziv = document.getElementById('naziv').value;
+    let nazivPredmeta = document.getElementById('naziv-predmeta').value;
     //alert(naziv);
     let tp = document.getElementById("tip");
     let tipId = tp.options[tp.selectedIndex].id;
@@ -79,8 +99,12 @@ function unesiRaspored() {
     let danId = dn.options[dn.selectedIndex].id;
     let dan = pronadjiDan(danId);
     //alert(JSON.stringify(dan));
+    let gr = document.getElementById("grupa");
+    let grupaId = gr.options[gr.selectedIndex].id;
+    let grupa = pronadjiGrupu(grupaId);
 
-    if(naziv != null && naziv != "" && tip != null && pocetak != null && kraj != null && dan != null) {
+    if(naziv != null && naziv != "" && nazivPredmeta != null && nazivPredmeta != "" &&
+        tip != null && pocetak != null && kraj != null && dan != null) {
         if(!(pocetak[3] == 3 || pocetak[3] == 0) || pocetak[4] != 0) {
             alert("Vrijeme početka aktivnosti nije u ispravnom formatu!");
             return;
@@ -105,10 +129,10 @@ function unesiRaspored() {
 
         let greska = false;
 
-        let pr = pronadjiPredmet(naziv);
+        let pr = pronadjiPredmet(nazivPredmeta);
 
         if(pr == null) {
-            var data = JSON.stringify({naziv:naziv});
+            var data = JSON.stringify({naziv: nazivPredmeta});
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
             xhr.addEventListener("readystatechange", function() {
@@ -129,13 +153,24 @@ function unesiRaspored() {
         
         if(!greska){
             var data2 = JSON.stringify({
-                naziv: naziv + tip.naziv,
+                naziv: naziv,
                 pocetak: pocetak,
                 kraj: kraj,
-                PredmetId: pr.id,
-                DanId: dan.id,
-                TipId: tip.id
+                predmetId: pr.id,
+                danId: dan.id,
+                tipId: tip.id
             });
+            if(grupa != null) {
+                data2 = JSON.stringify({
+                    naziv: naziv,
+                    pocetak: pocetak,
+                    kraj: kraj,
+                    predmetId: pr.id,
+                    danId: dan.id,
+                    tipId: tip.id,
+                    grupaId: grupa.id
+                });
+            }
             var xhr2 = new XMLHttpRequest();
             xhr2.withCredentials = true;
             xhr2.addEventListener("readystatechange", function() {
@@ -176,6 +211,18 @@ function pronadjiDan(id) {
     for(let i = 0; i < dani.length; i++) {
         if(dani[i].id == id) {
             return dani[i];
+        }
+    }
+    return null;
+}
+
+function pronadjiGrupu(id) {
+    if(id == "prazno") {
+        return null;
+    }
+    for(let i = 0; i < grupe.length; i++) {
+        if(grupe[i].id == id) {
+            return grupe[i];
         }
     }
     return null;
