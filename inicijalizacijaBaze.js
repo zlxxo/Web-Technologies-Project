@@ -16,6 +16,7 @@ function punjenjeBaze() {
     let dani = [];
     let tipovi = [];
     let grupe = [];
+    let studenti = [];
     return new Promise(function(resolve,reject){
         const ponedjeljak = baza.Dan.create({naziv: "Ponedjeljak"});
         dani.push(ponedjeljak);
@@ -41,6 +42,27 @@ function punjenjeBaze() {
         predmeti.push(rma);
         const rpr = baza.Predmet.create({naziv: "RPR"});
         predmeti.push(rpr);
+
+        const neko = baza.Student.create({
+            ime: "Neko Nekic",
+            index: 11111
+        });
+        studenti.push(neko);
+        const huso = baza.Student.create({
+            ime: "Huso Husic",
+            index: 11112
+        });
+        studenti.push(huso);
+        const maja = baza.Student.create({
+            ime: "Maja Majic",
+            index: 11113
+        });
+        studenti.push(maja);
+        const hana = baza.Student.create({
+            ime: "Hana Hanic",
+            index: 11115
+        });
+        studenti.push(hana);
     
         Promise.all(predmeti).then((pr) => {
             //console.log(pr);
@@ -56,7 +78,7 @@ function punjenjeBaze() {
                 naziv: "Grupa 1 - WT",
                 PredmetId: predmet1.id
             }).then((p) => {
-                p.setPredmeti([predmet1]).then(() => {
+                p.setGrupePredmeta([predmet1]).then(() => {
                     return new Promise(function(resolve,reject){resolve(p);});
                 });
             });
@@ -66,7 +88,7 @@ function punjenjeBaze() {
                 naziv: "Grupa 2 - WT",
                 PredmetId: predmet1.id
             }).then((p) => {
-                p.setPredmeti([predmet1]).then(() => {
+                p.setGrupePredmeta([predmet1]).then(() => {
                     return new Promise(function(resolve,reject){resolve(p);});
                 });
             });
@@ -76,7 +98,7 @@ function punjenjeBaze() {
                 naziv: "Grupa 1 - RMA",
                 PredmetId: predmet2.id
             }).then((p) => {
-                p.setPredmeti([predmet2]).then(() => {
+                p.setGrupePredmeta([predmet2]).then(() => {
                     return new Promise(function(resolve,reject){resolve(p);});
                 });
             });

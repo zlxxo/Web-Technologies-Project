@@ -23,22 +23,22 @@ baza.Tip = Tip;
 
 // relacije
 // Predmet 1 - N Grupa
-baza.Predmet.hasMany(baza.Grupa, {as: "predmeti"});
+baza.Predmet.hasMany(baza.Grupa, {as: "grupePredmeta"});
 
 // Aktivnost N - 1 Predmet
-baza.Predmet.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
+baza.Predmet.hasMany(baza.Aktivnost, {as: "aktivnostiPredmeta"});
 
 // Aktivnost N - 0 Grupa
-baza.Grupa.hasMany(baza.Aktivnost, {foreignKey: {allowNull: true}});
+baza.Grupa.hasMany(baza.Aktivnost, {as: "aktivnostiGrupe"});
 
 // Aktivnost N - 1 Dan
-baza.Dan.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
+baza.Dan.hasMany(baza.Aktivnost, {as: "aktivnostiDana"});
 
 // Aktivnost N - 1 Tip
-baza.Tip.hasMany(baza.Aktivnost, {foreignKey: {allowNull: false}});
+baza.Tip.hasMany(baza.Aktivnost, {as: "tipoviAktivnosti"});
 
 // Student N - M Grupa
-baza.StudentskeGrupe = baza.Student.belongsToMany(baza.Grupa, {through:'StudentskeGrupe'});
-baza.Grupa.belongsToMany(baza.Student, {through:'StudentskeGrupe'});
+baza.StudentskeGrupe = baza.Student.belongsToMany(baza.Grupa, {as: "grupe", through:'StudentskeGrupe'});
+baza.Grupa.belongsToMany(baza.Student, {as: "studenti", through:'StudentskeGrupe'});
 
 module.exports = baza;
