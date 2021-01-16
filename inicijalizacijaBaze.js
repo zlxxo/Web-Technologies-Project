@@ -18,9 +18,17 @@ function punjenjeBaze() {
     const vjezbe = baza.Tip.create({naziv: "Vjezbe"});
     const tutorijal = baza.Tip.create({naziv: "Tutorijal"});
 
+    let predmeti = [];
     const wt = baza.Predmet.create({naziv: "WT"});
+    predmeti.push(wt);
     const rma = baza.Predmet.create({naziv: "RMA"});
+    predmeti.push(rma);
     const rpr = baza.Predmet.create({naziv: "RPR"});
+    predmeti.push(rpr);
+
+    /*Promise.all(predmeti).then((pr) => {
+        const grupa1 = baza.Grupa.create({naziv: "Grupa 1 - WT"}).then();
+    });*/
 }
 
 const inicijalizacijaBaze = {};

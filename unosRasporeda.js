@@ -99,9 +99,6 @@ function unesiRaspored() {
     let danId = dn.options[dn.selectedIndex].id;
     let dan = pronadjiDan(danId);
     //alert(JSON.stringify(dan));
-    let gr = document.getElementById("grupa");
-    let grupaId = gr.options[gr.selectedIndex].id;
-    let grupa = pronadjiGrupu(grupaId);
 
     if(naziv != null && naziv != "" && nazivPredmeta != null && nazivPredmeta != "" &&
         tip != null && pocetak != null && kraj != null && dan != null) {
@@ -160,17 +157,6 @@ function unesiRaspored() {
                 danId: dan.id,
                 tipId: tip.id
             });
-            if(grupa != null) {
-                data2 = JSON.stringify({
-                    naziv: naziv,
-                    pocetak: pocetak,
-                    kraj: kraj,
-                    predmetId: pr.id,
-                    danId: dan.id,
-                    tipId: tip.id,
-                    grupaId: grupa.id
-                });
-            }
             var xhr2 = new XMLHttpRequest();
             xhr2.withCredentials = true;
             xhr2.addEventListener("readystatechange", function() {
